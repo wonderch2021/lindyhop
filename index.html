@@ -133,6 +133,10 @@ textarea{resize:vertical;min-height:70px}
     <div class="bar">
       <span class="tempo-strip" id="countInfo">Loading tutorials…</span>
       <button class="brass" id="newBtn" hidden>+ New tutorial</button>
+      <span id="unlock" class="bar" hidden>
+        <form id="unlockForm" class="bar" style="flex-direction:row;gap:6px"><input type="password" id="keyIn" class="search" style="width:150px;padding:7px 10px" placeholder="Edit key" aria-label="Edit key" autocomplete="current-password"><button type="submit">Unlock editing</button></form>
+        <button type="button" class="ghost" id="lockBtn" hidden>Lock editing</button>
+      </span>
     </div>
   </header>
 
@@ -151,7 +155,7 @@ textarea{resize:vertical;min-height:70px}
 
 <script>
 (function(){
-var db=null,user=null,canEdit=false,tuts=[],sel=null,filter='All',query='',mode='view',confirmDel=false,ready=false;
+var db=null,user=null,store=null,canEdit=false,tuts=[],sel=null,filter='All',query='',mode='view',confirmDel=false,ready=false;
 var play={t:null,i:-1,bpm:70};
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -295,7 +299,7 @@ function openEditor(t){
   if(t)$('del').onclick=function(){
     $('delbox').innerHTML='<div class="confirm"><span>Delete “'+esc(t.title)+'” for good?</span><button type="button" class="danger" id="delYes">Delete</button><button type="button" id="delNo">Keep it</button></div>';
     $('delNo').onclick=function(){$('delbox').innerHTML=''};
-    $('delYes').onclick=async function(){try{await db.collection('tutorials').doc(t.id).delete();sel=null;mode='view';toast('Deleted');renderView()}catch(e){showErr(e)}}};
+    $('delYes').onclick=async function(){try{await store.remove(t.id);sel=null;mode='view';toast('Deleted');renderView()}catch(e){showErr(e)}}};
   $('ed').onsubmit=async function(e){e.preventDefault();
     var title=$('f-title').value.trim();if(!title){$('err').hidden=false;$('err').textContent='Give the tutorial a name.';$('f-title').focus();return}
     var steps=[].map.call(rows.children,function(r){
@@ -305,12 +309,12 @@ function openEditor(t){
     var id=t?t.id:slug(title)+'-'+Date.now().toString(36).slice(-4);
     body.order=t&&t.order!=null?t.order:Date.now();
     $('save').disabled=true;
-    try{await db.collection('tutorials').doc(id).set(body);sel=id;mode='view';toast('Saved');renderList();renderView()}
+    try{await store.save(id,body);sel=id;mode='view';toast('Saved');renderList();renderView()}
     catch(err){$('save').disabled=false;showErr(err)}};
   $('f-title').focus();
 }
 function showErr(e){var el=$('err');if(!el)return toast('Could not save. Try again.');el.hidden=false;
-  el.textContent=e&&e.code==='quota_exceeded'?'The library is full. Delete a tutorial to make room.':e&&e.code==='invalid_argument'?'You can view this library but not change it.':'Could not save right now. Check your connection and try again.'}
+  el.textContent=e&&e.code==='unauthorized'?'Your edit key was not accepted. Unlock editing again with the right key.':e&&e.code==='quota_exceeded'?'The library is full. Delete a tutorial to make room.':e&&e.code==='invalid_argument'?'You can view this library but not change it.':'Could not save right now. Check your connection and try again.'}
 
 /* events */
 $('list').addEventListener('click',function(e){var b=e.target.closest('.item');if(!b)return;sel=b.dataset.id;mode='view';renderList();renderView();
@@ -319,22 +323,59 @@ $('filters').addEventListener('click',function(e){var b=e.target.closest('.chip'
 $('q').addEventListener('input',function(e){query=e.target.value;renderList()});
 $('newBtn').onclick=function(){openEditor(null)};
 
-/* boot */
+/* boot: inside a claude.ai artifact the tutorials live in the artifact's db;
+   anywhere else (your own server) they come from this app's /api/tutorials */
+function received(list){
+  tuts=list.map(function(x){x=Object.assign({},x);x.steps=(x.steps||[]).slice();return x})
+    .sort(function(a,b){return (a.order||0)-(b.order||0)});
+  var first=!ready;ready=true;
+  if(first&&!sel&&tuts.length)sel=tuts[0].id;
+  if(sel&&!current())sel=null;
+  renderList();if(mode!=='edit')renderView();
+}
+function getKey(){try{return localStorage.getItem('lindy-edit-key')||''}catch(e){return ''}}
+function setKey(k){try{k?localStorage.setItem('lindy-edit-key',k):localStorage.removeItem('lindy-edit-key')}catch(e){}}
+async function api(method,path,body){
+  var r=await fetch('api/'+path,{method:method,headers:Object.assign({'Content-Type':'application/json'},getKey()?{'X-Edit-Key':getKey()}:{}),body:body?JSON.stringify(body):undefined});
+  if(r.status===401){var e=new Error('unauthorized');e.code='unauthorized';throw e}
+  if(!r.ok){var e2=new Error('failed');e2.code='unavailable';throw e2}
+  return r.status===204?null:r.json();
+}
+async function bootServer(){
+  var cfg;
+  try{cfg=await api('GET','config')}catch(e){fail();return}
+  store={
+    save:async function(id,body){await api('PUT','tutorials/'+encodeURIComponent(id),body);received((await api('GET','tutorials')))},
+    remove:async function(id){await api('DELETE','tutorials/'+encodeURIComponent(id));received((await api('GET','tutorials')))}
+  };
+  if(!cfg.keyRequired){canEdit=true}
+  else if(getKey()){try{await api('POST','unlock');canEdit=true}catch(e){setKey('');canEdit=false}}
+  setEditUi(cfg.keyRequired);
+  try{received(await api('GET','tutorials'))}catch(e){fail();return}
+  setInterval(async function(){if(mode==='edit'||document.hidden)return;try{received(await api('GET','tutorials'))}catch(e){}},60000);
+}
+function setEditUi(keyRequired){
+  $('newBtn').hidden=!canEdit;
+  var u=$('unlock');if(!u)return;
+  u.hidden=!keyRequired;
+  $('unlockForm').hidden=canEdit;$('lockBtn').hidden=!canEdit;
+}
+$('unlockForm').onsubmit=async function(e){e.preventDefault();var k=$('keyIn').value.trim();if(!k)return;setKey(k);
+  try{await api('POST','unlock');canEdit=true;$('keyIn').value='';toast('Editing unlocked');setEditUi(true);renderView()}
+  catch(err){setKey('');toast(err.code==='unauthorized'?'That edit key is not right':'Could not reach the server')}};
+$('lockBtn').onclick=function(){setKey('');canEdit=false;mode='view';setEditUi(true);renderView();toast('Editing locked')};
 (async function(){
   var c=window.claude;
-  if(!c||!c.use){fail();return}
+  if(!c||!c.use){bootServer();return}
   var res=await Promise.all([c.use('db'),c.use('user')]);db=res[0];user=res[1];
   if(!db){fail();return}
+  store={save:function(id,body){return db.collection('tutorials').doc(id).set(body)},remove:function(id){return db.collection('tutorials').doc(id).delete()}};
   try{canEdit=user?await user.canEdit():false}catch(e){canEdit=false}
   $('newBtn').hidden=!canEdit;
   db.collection('tutorials').orderBy('order').onSnapshot(function(snap){
-    tuts=snap.docs.map(function(d){var x=Object.assign({},d.data());x.id=d.id;x.steps=(x.steps||[]).slice();return x});
-    var first=!ready;ready=true;
-    if(first&&!sel&&tuts.length)sel=tuts[0].id;
-    if(sel&&!current())sel=null;
-    renderList();if(mode!=='edit')renderView();
+    received(snap.docs.map(function(d){var x=Object.assign({},d.data());x.id=d.id;return x}));
   },function(){fail()});
 })();
-function fail(){ready=true;$('countInfo').textContent='';$('main').innerHTML='<section class="sheet"><div class="empty"><strong>Library not available</strong><span>Sign in to claude.ai and open this page there to see the tutorials.</span></div></section>';renderList()}
+function fail(){ready=true;$('countInfo').textContent='';$('main').innerHTML='<section class="sheet"><div class="empty"><strong>Library not available</strong><span>The tutorials could not be loaded. Check that the server is running, then reload the page.</span></div></section>';renderList()}
 })();
 </script>
