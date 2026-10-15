@@ -1,0 +1,517 @@
+[
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 1,
+    "position": "Closed",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "follower": "Right foot steps back",
+        "leader": "Left foot steps back, small step, ball of the foot on the floor"
+      },
+      {
+        "count": "2",
+        "follower": "Weight forward onto the left foot",
+        "leader": "Weight forward onto the right foot"
+      },
+      {
+        "count": "3",
+        "follower": "Right foot beside left",
+        "leader": "Left foot beside right"
+      },
+      {
+        "count": "&",
+        "follower": "Quick left",
+        "leader": "Quick right, almost in place"
+      },
+      {
+        "count": "4",
+        "follower": "Right again",
+        "leader": "Left again"
+      },
+      {
+        "count": "5",
+        "follower": "Left foot steps in place",
+        "leader": "Right foot steps in place"
+      },
+      {
+        "count": "&",
+        "follower": "Quick right",
+        "leader": "Quick left"
+      },
+      {
+        "count": "6",
+        "follower": "Left again, ready for 1",
+        "leader": "Right again, left foot free for the next rock step"
+      }
+    ],
+    "summary": "The foundation of every 6-count move: rock step, triple step, triple step, danced together in closed position.",
+    "tips": "Keep the rock step small: about half a foot length.\nTriple steps happen almost in place, under your body.\nPulse down softly from the knees on every beat.\nLead the rock step with your frame, not by pulling with your arms.\nRight hand flat on her shoulder blade; left hand at her shoulder height, elbow pointing down.",
+    "title": "Closed basic",
+    "updated": 1792070600000,
+    "video": "",
+    "id": "closed-basic"
+  },
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 2,
+    "position": "Closed → Open",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Right foot back, together with the leader",
+        "leader": "Rock step back on the left; frame moves back as one unit",
+        "lf": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Weight onto left foot",
+        "leader": "Weight onto right; turn chest and right toe slightly right",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 45
+        }
+      },
+      {
+        "count": "3",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Triple step backwards, away from the leader",
+        "leader": "Left in place; right hand gently guides her away",
+        "lf": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 45
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Keep travelling back",
+        "leader": "Quick right; release the right hand",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Square up to face the leader",
+        "leader": "Left in place, square up; left hand carries the connection",
+        "lf": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "5",
+        "ff": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Small triple step back",
+        "leader": "Right in place, keep your frame",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Settle at arm's length",
+        "leader": "Quick left, arm relaxed, elbow slightly bent",
+        "lf": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "6",
+        "ff": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Facing the leader, ready for 1",
+        "leader": "Right; you are in open position",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      }
+    ],
+    "summary": "From closed position, send the follower out to arm's length so you end in open position, one hand connected.",
+    "tips": "The lead comes from the chest turn on 2, not from pushing.\nYour feet stay home while she travels.\nDon't lock the elbow in open position; hold her hand lightly, like a cup.",
+    "title": "Send out",
+    "updated": 1792070600000,
+    "video": "",
+    "id": "send-out"
+  },
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 3,
+    "position": "Open → Open",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Right foot back, match the stretch",
+        "leader": "Left foot back, lean back slightly, feel the stretch",
+        "lf": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Weight forward onto left",
+        "leader": "Weight forward onto right, elbow softens",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "ff": {
+          "dir": "fwd",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Small move forward",
+        "leader": "Left steps slightly forward",
+        "lf": {
+          "dir": "fwd",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "fwd",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Quick left",
+        "leader": "Quick right",
+        "lf": {
+          "dir": "fwd",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "ff": {
+          "dir": "fwd",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Right",
+        "leader": "Left, most compression: elbow bent, hand in front of you",
+        "lf": {
+          "dir": "fwd",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "5",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Settle back",
+        "leader": "Right steps back towards home",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Quick right",
+        "leader": "Quick left",
+        "lf": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "6",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Left, ready for 1",
+        "leader": "Right, home, ready for the next stretch",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      }
+    ],
+    "summary": "The basic in open position, connected by one hand. The stretch on the rock step is the connection you lead everything else with.",
+    "tips": "Light stretch on 1, light compression around 4.\nThe arm works like a spring: some give, never limp, never stiff.",
+    "title": "Open basic",
+    "updated": 1792070600000,
+    "video": "",
+    "id": "open-basic"
+  },
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 4,
+    "position": "Open → Closed",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "follower": "Right foot back, matching the stretch",
+        "leader": "Left foot back; the stretch builds energy"
+      },
+      {
+        "count": "2",
+        "follower": "Weight onto left, start moving forward",
+        "leader": "Weight onto right; bend the left elbow slightly to invite her in"
+      },
+      {
+        "count": "3",
+        "follower": "Triple step forward towards the leader",
+        "leader": "Left in place; draw the left hand towards your center"
+      },
+      {
+        "count": "&",
+        "follower": "Keep travelling forward",
+        "leader": "Quick right; open your right arm to receive her"
+      },
+      {
+        "count": "4",
+        "follower": "Arrive slightly to the leader's right side",
+        "leader": "Left in place; right hand lands softly on her back"
+      },
+      {
+        "count": "5",
+        "follower": "Left hand to his shoulder",
+        "leader": "Right in place, closed frame"
+      },
+      {
+        "count": "&",
+        "follower": "Quick right",
+        "leader": "Quick left"
+      },
+      {
+        "count": "6",
+        "follower": "Back in closed, ready for 1",
+        "leader": "Right; back in closed position"
+      }
+    ],
+    "summary": "From open position, bring the follower back into closed position.",
+    "tips": "The rebound from the stretch brings her in; don't pull.\nPrepare the right arm early so she arrives into it.\nShe ends slightly offset to your right, so your feet don't collide.",
+    "title": "Bring in",
+    "updated": 1792070600000,
+    "video": "",
+    "id": "bring-in"
+  },
+  {
+    "category": "6-count turns",
+    "level": "Beginner",
+    "order": 5,
+    "position": "Open → Open",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "ff": {
+          "dir": "back",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Rock step back on the right",
+        "leader": "Rock step back on the left, normal open stretch",
+        "lf": {
+          "dir": "back",
+          "foot": "L",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 0
+        },
+        "follower": "Weight onto left; feel the hand rise",
+        "leader": "Weight onto right; start lifting the left hand (the signal)",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "ff": {
+          "dir": "fwd",
+          "foot": "R",
+          "turn": 0
+        },
+        "follower": "Triple step forward past the leader's right side",
+        "leader": "Triple step to your left, out of her path; hand above her head",
+        "lf": {
+          "dir": "fl",
+          "foot": "L",
+          "turn": -45
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "fwd",
+          "foot": "L",
+          "turn": 45
+        },
+        "follower": "Start turning right under the arm",
+        "leader": "Keep turning left; hand draws a small circle",
+        "lf": {
+          "dir": "fl",
+          "foot": "R",
+          "turn": -90
+        }
+      },
+      {
+        "count": "4",
+        "ff": {
+          "dir": "fr",
+          "foot": "R",
+          "turn": 90
+        },
+        "follower": "Turn right, arm bent, hand near the forehead",
+        "leader": "Halfway around; loose hold so her hand rotates in yours",
+        "lf": {
+          "dir": "left",
+          "foot": "L",
+          "turn": -90
+        }
+      },
+      {
+        "count": "5",
+        "ff": {
+          "dir": "right",
+          "foot": "L",
+          "turn": 180
+        },
+        "follower": "Finish the turn, face the leader",
+        "leader": "Lower the hand to chest height",
+        "lf": {
+          "dir": "left",
+          "foot": "R",
+          "turn": 180
+        }
+      },
+      {
+        "count": "&",
+        "ff": {
+          "dir": "right",
+          "foot": "R",
+          "turn": 180
+        },
+        "follower": "Settle back into open position",
+        "leader": "Settle into your new spot",
+        "lf": {
+          "dir": "left",
+          "foot": "L",
+          "turn": 180
+        }
+      },
+      {
+        "count": "6",
+        "ff": {
+          "dir": "place",
+          "foot": "L",
+          "turn": 180
+        },
+        "follower": "On the leader's old spot, ready for 1",
+        "leader": "On her old spot, facing her in open",
+        "lf": {
+          "dir": "place",
+          "foot": "R",
+          "turn": 180
+        }
+      }
+    ],
+    "summary": "Partners swap places: the follower turns to her right under the leader's raised left hand while the leader walks around her to the left.",
+    "tips": "Lift on 2, not on 3; a late signal makes the turn a scramble.\nGet out of her path with a curve to your left.\nMake a halo, not a crank: never grip and twist her hand.\nDance it twice in a row to return to your original spots.",
+    "title": "Underarm pass",
+    "updated": 1792070600000,
+    "video": "",
+    "id": "underarm-pass"
+  }
+]

@@ -1,0 +1,340 @@
+<title>Lindy Hop Library</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: practice notebook. Library list on the left, a count-by-count step sheet on the right; stacks on phones. */
+:root{
+  --bg:#F4F3F7; --surface:#FFFFFF; --sunk:#ECEAF2; --ink:#1E1C29; --muted:#5F5B70; --line:#DAD7E3;
+  --brass:#C8901A; --brass-soft:#F7E7BF; --brass-ink:#5A3E00;
+  --savoy:#2D4C9E; --savoy-soft:#E2E8F8;
+  --lead:#4B3FB0; --follow:#13806A; --danger:#B3261E;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14131B; --surface:#1D1B27; --sunk:#262433; --ink:#ECEAF3; --muted:#A9A4BD; --line:#34314A;
+  --brass:#F0B83A; --brass-soft:#3B2E10; --brass-ink:#F7D88A;
+  --savoy:#93A9EE; --savoy-soft:#232C4A; --lead:#A79DF5; --follow:#5FD0B4; --danger:#F2817A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14131B; --surface:#1D1B27; --sunk:#262433; --ink:#ECEAF3; --muted:#A9A4BD; --line:#34314A;
+  --brass:#F0B83A; --brass-soft:#3B2E10; --brass-ink:#F7D88A;
+  --savoy:#93A9EE; --savoy-soft:#232C4A; --lead:#A79DF5; --follow:#5FD0B4; --danger:#F2817A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:3px solid var(--ink);padding-bottom:12px}
+.brand h1{font-family:var(--display);font-weight:800;font-size:clamp(34px,6vw,54px);line-height:.92;margin:0;letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
+.brand h1 span{color:var(--brass)}
+.brand p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.tempo-strip{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+button,.btn{font:inherit;font-size:14px;font-weight:600;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+button:hover,.btn:hover{border-color:var(--muted)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.item:focus-visible,a:focus-visible{outline:2px solid var(--savoy);outline-offset:2px}
+button.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.brass{background:var(--brass);color:#1E1500;border-color:var(--brass)}
+button.ghost{background:transparent}
+button.danger{color:var(--danger);border-color:var(--danger);background:transparent}
+button:disabled{opacity:.5;cursor:default}
+.grid{display:grid;grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+aside{display:flex;flex-direction:column;gap:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (max-width:820px){aside{position:static}}
+.search{width:100%;font:inherit;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.list{display:flex;flex-direction:column;gap:4px;max-height:62vh;overflow:auto;padding-right:2px}
+@media (max-width:820px){.list{max-height:none}}
+.group{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:10px 12px;border-radius:8px;border:1px solid transparent;background:transparent;text-align:left;cursor:pointer;width:100%;font-weight:400}
+.item:hover{background:var(--sunk);border-color:transparent}
+.item[aria-current="true"]{background:var(--surface);border-color:var(--ink)}
+.item b{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.item small{grid-column:1/-1;color:var(--muted);font-size:12px}
+.tag{font-family:var(--mono);font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--brass-soft);color:var(--brass-ink);align-self:start}
+.tag.eight{background:var(--savoy-soft);color:var(--savoy)}
+main{min-width:0}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:22px;min-width:0}
+.sheet h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,44px);line-height:1;margin:0;text-transform:uppercase;text-wrap:balance}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.summary{margin:0;max-width:65ch;color:var(--ink)}
+.head-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+/* count player */
+.player{border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);padding:14px;display:flex;flex-direction:column;gap:12px}
+.ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctl input[type=range]{flex:1;min-width:120px;accent-color:var(--brass)}
+.bpm{font-family:var(--mono);font-size:13px;font-weight:700;min-width:70px}
+.beats{display:flex;gap:6px;flex-wrap:wrap}
+.beat{font-family:var(--mono);font-weight:700;font-size:15px;min-width:38px;height:38px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:0 6px;cursor:pointer}
+.beat.amp{min-width:26px;font-size:12px}
+.beat.on{background:var(--brass);border-color:var(--brass);color:#1E1500}
+.now{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:560px){.now{grid-template-columns:auto minmax(0,1fr)}.now .f{grid-column:2}}
+.bigc{font-family:var(--display);font-weight:800;font-size:64px;line-height:.85;min-width:56px;color:var(--brass)}
+.who{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.who.l{color:var(--lead)} .who.f{color:var(--follow)}
+.now p{margin:2px 0 0;font-size:14px}
+/* footprints */
+.feet{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.fp{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 10px 8px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.fp svg{width:100%;max-width:240px;align-self:center;display:block}
+.fp .fd{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--muted);text-align:center;min-height:18px}
+.foot{transition:transform .16s ease-out}
+.fw{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--muted);padding:0 0 6px 66px;border-bottom:1px dashed var(--line)}
+@media (max-width:620px){.fw{padding-left:0}}
+.fw select{width:auto;padding:4px 6px;font-size:12px}
+.fw .who{margin-left:6px}
+/* steps table */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--sunk)}
+td.c{font-family:var(--mono);font-weight:700;width:56px;font-variant-numeric:tabular-nums}
+tr.on td{background:var(--brass-soft)}
+tr.on td.c{color:var(--brass-ink)}
+th.l{color:var(--lead)} th.f{color:var(--follow)}
+.tips{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;max-width:68ch}
+.empty{padding:48px 20px;text-align:center;color:var(--muted);display:flex;flex-direction:column;gap:10px;align-items:center}
+.empty strong{font-family:var(--display);font-size:28px;color:var(--ink);text-transform:uppercase}
+/* editor */
+form{display:flex;flex-direction:column;gap:16px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted);min-width:0}
+input[type=text],input[type=url],select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:70px}
+.rows{display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:58px minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:start}
+.row input.cnt{font-family:var(--mono);font-weight:700;text-align:center}
+@media (max-width:620px){.row{grid-template-columns:58px minmax(0,1fr) auto}.row .fo{grid-column:2}}
+.rowhead{display:grid;grid-template-columns:58px minmax(0,1fr) minmax(0,1fr) 38px;gap:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:620px){.rowhead{display:none}}
+.icon{padding:7px 10px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar .sp{flex:1}
+.note{font-size:13px;color:var(--muted)}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;border:1px solid var(--danger);border-radius:8px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;z-index:10}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Lindy Hop <span>Library</span></h1>
+      <p>Your moves, count by count, for leader and follower.</p>
+    </div>
+    <div class="bar">
+      <span class="tempo-strip" id="countInfo">Loading tutorials…</span>
+      <button class="brass" id="newBtn" hidden>+ New tutorial</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <aside>
+      <input class="search" id="q" type="search" placeholder="Search moves, notes…" aria-label="Search tutorials">
+      <div class="chips" id="filters" role="group" aria-label="Filter by rhythm"></div>
+      <nav class="list" id="list" aria-label="Tutorials"></nav>
+    </aside>
+    <main id="main">
+      <section class="sheet"><div class="empty"><strong>Loading tutorials</strong><span>Your library appears here in a moment.</span></div></section>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+(function(){
+var db=null,user=null,canEdit=false,tuts=[],sel=null,filter='All',query='',mode='view',confirmDel=false,ready=false;
+var play={t:null,i:-1,bpm:70};
+var $=function(id){return document.getElementById(id)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function toast(msg){var t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){t.hidden=true},2400)}
+function slug(s){return (s||'tutorial').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'tutorial'}
+
+/* beat math: "1".."8" sit on the beat, "&"/"a" is a swung offbeat after the previous count */
+function beats(steps){var out=[],last=-1;steps.forEach(function(s){var n=parseInt(s.count,10);var b=isNaN(n)?last+0.67:n-1;if(!isNaN(n))last=n-1;out.push(b)});return out}
+
+function current(){return tuts.find(function(t){return t.id===sel})||null}
+
+function renderList(){
+  var cats={};tuts.forEach(function(t){cats[t.rhythm||'Other']=1});
+  var opts=['All'].concat(Object.keys(cats).sort());
+  if(opts.indexOf(filter)<0)filter='All';
+  $('filters').innerHTML=opts.map(function(o){return '<button class="chip" aria-pressed="'+(o===filter)+'" data-f="'+esc(o)+'">'+esc(o)+'</button>'}).join('');
+  var q=query.toLowerCase();
+  var vis=tuts.filter(function(t){
+    if(filter!=='All'&&(t.rhythm||'Other')!==filter)return false;
+    if(!q)return true;
+    return JSON.stringify([t.title,t.category,t.summary,t.tips,t.steps]).toLowerCase().indexOf(q)>-1});
+  if(!ready){$('list').innerHTML='';return}
+  if(!vis.length){$('list').innerHTML='<p class="note">'+(tuts.length?'No tutorial matches that search.':'No tutorials yet.')+'</p>';return}
+  var groups={};vis.forEach(function(t){var g=t.category||'Uncategorised';(groups[g]=groups[g]||[]).push(t)});
+  $('list').innerHTML=Object.keys(groups).map(function(g){
+    return '<div class="group">'+esc(g)+'</div>'+groups[g].map(function(t){
+      return '<button class="item" data-id="'+esc(t.id)+'" aria-current="'+(t.id===sel)+'"><b>'+esc(t.title)+'</b><span class="tag'+(/8/.test(t.rhythm||'')?' eight':'')+'">'+esc(t.rhythm||'–')+'</span><small>'+esc([t.position,t.level].filter(Boolean).join(' · '))+'</small></button>'}).join('')}).join('');
+  $('countInfo').textContent=tuts.length+' tutorial'+(tuts.length===1?'':'s');
+}
+
+function renderView(){
+  stop();
+  var t=current(),m=$('main');
+  if(!ready){return}
+  if(!t){
+    m.innerHTML='<section class="sheet"><div class="empty"><strong>'+(tuts.length?'Pick a move':'Start your library')+'</strong><span>'+(tuts.length?'Choose a tutorial on the left to see its counts.':(canEdit?'Add your first move with “New tutorial”: give it a name, then write what the leader and follower do on each count.':'There are no tutorials here yet.'))+'</span>'+(!tuts.length&&canEdit?'<button class="brass" id="emptyNew">+ New tutorial</button>':'')+'</div></section>';
+    var en=$('emptyNew');if(en)en.onclick=function(){openEditor(null)};return}
+  var steps=t.steps||[],tips=(t.tips||'').split('\n').map(function(s){return s.trim()}).filter(Boolean);
+  var h='<section class="sheet"><div class="head-row"><div style="min-width:0;display:flex;flex-direction:column;gap:10px"><h2>'+esc(t.title)+'</h2><div class="meta">';
+  [t.rhythm,t.position,t.level,t.category].filter(Boolean).forEach(function(x){h+='<span class="pill">'+esc(x)+'</span>'});
+  h+='</div></div>'+(canEdit?'<button id="editBtn">Edit</button>':'')+'</div>';
+  if(t.summary)h+='<p class="summary">'+esc(t.summary)+'</p>';
+  if(steps.length){
+    h+='<div><p class="label">Count player</p><div class="player"><div class="ctl"><button class="primary" id="pp">▶ Play</button><button id="nx">Next count</button><label for="tempo" class="note">Tempo</label><input type="range" id="tempo" min="40" max="180" step="5" value="'+play.bpm+'"><span class="bpm" id="bpmo">'+play.bpm+' BPM</span></div>';
+    h+='<div class="beats">'+steps.map(function(s,k){return '<button class="beat'+(isNaN(parseInt(s.count,10))?' amp':'')+'" data-k="'+k+'" aria-label="Count '+esc(s.count)+'">'+esc(s.count)+'</button>'}).join('')+'</div>';
+    h+=feetHtml()+'<div class="now"><div class="bigc" id="bigc">–</div><div><div class="who l">Leader</div><p id="nowL" class="note">Press play or tap a count.</p></div><div class="f"><div class="who f">Follower</div><p id="nowF" class="note"></p></div></div></div></div>';
+    h+='<div><p class="label">Step sheet</p><div class="tbl"><table><thead><tr><th>Count</th><th class="l">Leader</th><th class="f">Follower</th></tr></thead><tbody>'+steps.map(function(s,k){return '<tr data-k="'+k+'"><td class="c">'+esc(s.count)+'</td><td>'+esc(s.leader)+'</td><td>'+esc(s.follower)+'</td></tr>'}).join('')+'</tbody></table></div></div>';
+  }
+  if(tips.length)h+='<div><p class="label">Tips</p><ul class="tips">'+tips.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>';
+  if(t.video&&/^https?:\/\//.test(t.video))h+='<div><p class="label">Reference video</p><a class="btn" href="'+esc(t.video)+'" target="_blank" rel="noopener">Open video ↗</a></div>';
+  h+='</section>';
+  m.innerHTML=h;
+  var eb=$('editBtn');if(eb)eb.onclick=function(){openEditor(t)};
+  if(steps.length){
+    $('pp').onclick=toggle;$('nx').onclick=function(){go((play.i+1)%steps.length)};
+    $('tempo').oninput=function(e){play.bpm=+e.target.value;$('bpmo').textContent=play.bpm+' BPM'};
+    m.querySelectorAll('.beat').forEach(function(b){b.onclick=function(){go(+b.dataset.k)}});
+    drawFeet(-1);
+  }
+}
+function go(k){
+  var t=current();if(!t)return;var s=t.steps[k];play.i=k;
+  $('bigc').textContent=s.count;$('nowL').textContent=s.leader||'—';$('nowL').className='';$('nowF').textContent=s.follower||'—';
+  document.querySelectorAll('.beat').forEach(function(b){b.classList.toggle('on',+b.dataset.k===k)});
+  document.querySelectorAll('tbody tr').forEach(function(r){r.classList.toggle('on',+r.dataset.k===k)});
+  drawFeet(k);
+}
+
+/* footprints: each count stores which foot steps and where, relative to that foot's home spot */
+var DIRS={place:[0,0],back:[0,40],fwd:[0,-40],left:[-30,0],right:[30,0],bl:[-24,32],br:[24,32],fl:[-24,-32],fr:[24,-32]};
+var DIRL={place:'In place',back:'Back',fwd:'Forward',left:'Left',right:'Right',bl:'Back left',br:'Back right',fl:'Fwd left',fr:'Fwd right'};
+var TURNS={'0':'No turn','-45':'⅛ turn left','45':'⅛ turn right','-90':'¼ turn left','90':'¼ turn right','180':'½ turn'};
+var HOME={L:[78,105],R:[122,105]};
+function footOf(s,k,role){var d=s&&s[role==='l'?'lf':'ff'];if(d&&d.foot)return {foot:d.foot,dir:d.dir||'place',turn:+d.turn||0};
+  var even=k%2===0;return {foot:role==='l'?(even?'L':'R'):(even?'R':'L'),dir:k===0?'back':'place',turn:0}}
+function feetHtml(){
+  function panel(role,name){var g='';
+    ['L','R'].forEach(function(f){g+='<g class="foot" id="ft-'+role+'-'+f+'"><ellipse id="fb-'+role+'-'+f+'" cx="0" cy="5" rx="15" ry="27" stroke-width="1"/><ellipse id="fh-'+role+'-'+f+'" cx="0" cy="-24" rx="12" ry="9" stroke-width="1"/><text id="fx-'+role+'-'+f+'" x="0" y="10" text-anchor="middle" style="font:700 12px var(--mono);fill:var(--muted)">'+f+'</text></g>'});
+    return '<div class="fp"><div class="who '+(role==='l'?'l':'f')+'">'+name+'</div><svg viewBox="0 0 200 190" role="img" aria-label="'+name+' footprints"><rect x="6" y="20" width="188" height="162" rx="10" fill="var(--sunk)"/><text x="100" y="13" text-anchor="middle" style="font:500 10px var(--body);fill:var(--muted)">Partner this way ↑</text>'+
+      '<g fill="none" stroke="var(--line)" stroke-dasharray="3 3"><ellipse cx="78" cy="110" rx="15" ry="27"/><ellipse cx="122" cy="110" rx="15" ry="27"/></g>'+g+'</svg><div class="fd" id="fd-'+role+'">Home</div></div>'}
+  return '<div class="feet">'+panel('l','Leader')+panel('f','Follower')+'</div>'}
+function drawFeet(k){
+  var t=current();if(!t||!document.getElementById('fd-l'))return;var st=t.steps||[];
+  ['l','f'].forEach(function(role){
+    var pos={L:[HOME.L[0],HOME.L[1],0],R:[HOME.R[0],HOME.R[1],0]},act=null;
+    for(var j=0;j<=k&&j<st.length;j++){var d=footOf(st[j],j,role),o=DIRS[d.dir]||[0,0];pos[d.foot]=[HOME[d.foot][0]+o[0],HOME[d.foot][1]+o[1],d.turn];act=d}
+    ['L','R'].forEach(function(f){var p=pos[f],on=act&&act.foot===f;
+      $('ft-'+role+'-'+f).setAttribute('transform','translate('+p[0]+','+p[1]+') rotate('+p[2]+')');
+      var col=role==='l'?'var(--lead)':'var(--follow)';
+      ['fb','fh'].forEach(function(x){var e=$(x+'-'+role+'-'+f);e.setAttribute('fill',on?col:'var(--surface)');e.setAttribute('fill-opacity',on?'0.85':'1');e.setAttribute('stroke',on?col:'var(--muted)')});
+      $('fx-'+role+'-'+f).style.fill=on?'var(--surface)':'var(--muted)'});
+    $('fd-'+role).textContent=act?(act.foot+' · '+DIRL[act.dir]+(act.turn?' · '+TURNS[String(act.turn)]:'')):'Home';
+  })}
+function fwSelects(d,role){
+  return '<select class="'+role+'-foot" aria-label="'+(role==='l'?'Leader':'Follower')+' foot">'+['L','R'].map(function(f){return '<option'+(f===d.foot?' selected':'')+'>'+f+'</option>'}).join('')+'</select>'+
+    '<select class="'+role+'-dir" aria-label="Direction">'+Object.keys(DIRL).map(function(x){return '<option value="'+x+'"'+(x===d.dir?' selected':'')+'>'+DIRL[x]+'</option>'}).join('')+'</select>'+
+    '<select class="'+role+'-turn" aria-label="Turn">'+Object.keys(TURNS).map(function(x){return '<option value="'+x+'"'+(+x===d.turn?' selected':'')+'>'+TURNS[x]+'</option>'}).join('')+'</select>'}
+function toggle(){if(play.t){stop()}else{play.t=1;$('pp').textContent='❚❚ Pause';tick()}}
+function tick(){
+  var t=current();if(!play.t||!t)return;var st=t.steps,b=beats(st);
+  var k=(play.i+1)%st.length;go(k);
+  var total=Math.floor(Math.max.apply(null,b))+1;var nb=k+1<st.length?b[k+1]:total;
+  play.t=setTimeout(tick,Math.max(0.2,nb-b[k])*60000/play.bpm);
+}
+function stop(){if(play.t&&play.t!==1)clearTimeout(play.t);play.t=null;play.i=-1;var p=$('pp');if(p)p.textContent='▶ Play'}
+
+/* editor */
+var TPL={'6-count':['1','2','3','&','4','5','&','6'],'8-count':['1','2','3','&','4','5','6','7','&','8']};
+function openEditor(t){
+  stop();mode='edit';confirmDel=false;
+  var d=t?JSON.parse(JSON.stringify(t)):{title:'',category:'',rhythm:'6-count',position:'',level:'Beginner',summary:'',tips:'',video:'',steps:TPL['6-count'].map(function(c){return {count:c,leader:'',follower:''}})};
+  var cats={};tuts.forEach(function(x){if(x.category)cats[x.category]=1});
+  var m=$('main');
+  var h='<section class="sheet"><div class="head-row"><h2>'+(t?'Edit tutorial':'New tutorial')+'</h2></div><form id="ed" novalidate>';
+  h+='<label class="f">Name<input type="text" id="f-title" required maxlength="80" value="'+esc(d.title)+'" placeholder="e.g. Tuck turn"></label>';
+  h+='<div class="fgrid"><label class="f">Category<input type="text" id="f-cat" list="cats" value="'+esc(d.category)+'" placeholder="e.g. 6-count moves"><datalist id="cats">'+Object.keys(cats).map(function(c){return '<option value="'+esc(c)+'">'}).join('')+'</datalist></label>';
+  h+='<label class="f">Rhythm<select id="f-rhythm">'+['6-count','8-count','Other'].map(function(o){return '<option'+(o===d.rhythm?' selected':'')+'>'+o+'</option>'}).join('')+'</select></label>';
+  h+='<label class="f">Position<select id="f-pos">'+['','Closed','Open','Closed → Open','Open → Closed','Open → Open','Solo'].map(function(o){return '<option value="'+esc(o)+'"'+(o===d.position?' selected':'')+'>'+(o||'—')+'</option>'}).join('')+'</select></label>';
+  h+='<label class="f">Level<select id="f-level">'+['Beginner','Improver','Intermediate','Advanced'].map(function(o){return '<option'+(o===d.level?' selected':'')+'>'+o+'</option>'}).join('')+'</select></label></div>';
+  h+='<label class="f">Summary<textarea id="f-sum" rows="2" placeholder="What the move is and where it starts and ends.">'+esc(d.summary)+'</textarea></label>';
+  h+='<div><div class="bar" style="margin-bottom:8px"><p class="label" style="margin:0">Counts</p><span class="sp"></span><button type="button" id="tpl6">Fill 6-count</button><button type="button" id="tpl8">Fill 8-count</button></div>';
+  h+='<div class="rowhead"><span>Count</span><span style="color:var(--lead)">Leader</span><span style="color:var(--follow)">Follower</span><span></span></div><div class="rows" id="rows"></div>';
+  h+='<button type="button" id="addRow" style="margin-top:8px">+ Add count</button></div>';
+  h+='<label class="f">Tips (one per line)<textarea id="f-tips" rows="4">'+esc(d.tips)+'</textarea></label>';
+  h+='<label class="f">Reference video link<input type="url" id="f-video" value="'+esc(d.video)+'" placeholder="https://…"></label>';
+  h+='<div id="err" class="note" style="color:var(--danger)" hidden></div>';
+  h+='<div class="bar"><button class="primary" type="submit" id="save">Save tutorial</button><button type="button" class="ghost" id="cancel">Cancel</button><span class="sp"></span>'+(t?'<button type="button" class="danger" id="del">Delete</button>':'')+'</div><div id="delbox"></div></form></section>';
+  m.innerHTML=h;
+  var rows=$('rows');
+  function addRow(s,k){var r=document.createElement('div');r.className='row';
+    r.innerHTML='<input type="text" class="cnt" aria-label="Count" value="'+esc(s.count)+'" maxlength="3"><input type="text" class="le" aria-label="Leader" value="'+esc(s.leader)+'"><input type="text" class="fo" aria-label="Follower" value="'+esc(s.follower)+'"><button type="button" class="icon ghost" aria-label="Remove count">✕</button>'+
+      '<div class="fw"><span>Footprints</span><span class="who l">Leader</span>'+fwSelects(footOf(s,k,'l'),'l')+'<span class="who f">Follower</span>'+fwSelects(footOf(s,k,'f'),'f')+'</div>';
+    r.querySelector('button').onclick=function(){r.remove()};rows.appendChild(r)}
+  d.steps.forEach(addRow);
+  $('addRow').onclick=function(){addRow({count:'',leader:'',follower:''},rows.children.length)};
+  function fill(k){var cur=[].map.call(rows.children,function(r){return r.querySelector('.le').value+r.querySelector('.fo').value}).join('');
+    if(cur.trim()&&!fill.ok){fill.ok=1;toast('Press again to replace the current counts');setTimeout(function(){fill.ok=0},3000);return}
+    fill.ok=0;rows.innerHTML='';TPL[k].forEach(function(c,i){addRow({count:c,leader:'',follower:''},i)});$('f-rhythm').value=k}
+  $('tpl6').onclick=function(){fill('6-count')};$('tpl8').onclick=function(){fill('8-count')};
+  $('cancel').onclick=function(){mode='view';renderView()};
+  if(t)$('del').onclick=function(){
+    $('delbox').innerHTML='<div class="confirm"><span>Delete “'+esc(t.title)+'” for good?</span><button type="button" class="danger" id="delYes">Delete</button><button type="button" id="delNo">Keep it</button></div>';
+    $('delNo').onclick=function(){$('delbox').innerHTML=''};
+    $('delYes').onclick=async function(){try{await db.collection('tutorials').doc(t.id).delete();sel=null;mode='view';toast('Deleted');renderView()}catch(e){showErr(e)}}};
+  $('ed').onsubmit=async function(e){e.preventDefault();
+    var title=$('f-title').value.trim();if(!title){$('err').hidden=false;$('err').textContent='Give the tutorial a name.';$('f-title').focus();return}
+    var steps=[].map.call(rows.children,function(r){
+      function fw(role){return {foot:r.querySelector('.'+role+'-foot').value,dir:r.querySelector('.'+role+'-dir').value,turn:+r.querySelector('.'+role+'-turn').value}}
+      return {count:r.querySelector('.cnt').value.trim(),leader:r.querySelector('.le').value.trim(),follower:r.querySelector('.fo').value.trim(),lf:fw('l'),ff:fw('f')}}).filter(function(s){return s.count||s.leader||s.follower});
+    var body={title:title,category:$('f-cat').value.trim(),rhythm:$('f-rhythm').value,position:$('f-pos').value,level:$('f-level').value,summary:$('f-sum').value.trim(),steps:steps,tips:$('f-tips').value.trim(),video:$('f-video').value.trim(),updated:Date.now()};
+    var id=t?t.id:slug(title)+'-'+Date.now().toString(36).slice(-4);
+    body.order=t&&t.order!=null?t.order:Date.now();
+    $('save').disabled=true;
+    try{await db.collection('tutorials').doc(id).set(body);sel=id;mode='view';toast('Saved');renderList();renderView()}
+    catch(err){$('save').disabled=false;showErr(err)}};
+  $('f-title').focus();
+}
+function showErr(e){var el=$('err');if(!el)return toast('Could not save. Try again.');el.hidden=false;
+  el.textContent=e&&e.code==='quota_exceeded'?'The library is full. Delete a tutorial to make room.':e&&e.code==='invalid_argument'?'You can view this library but not change it.':'Could not save right now. Check your connection and try again.'}
+
+/* events */
+$('list').addEventListener('click',function(e){var b=e.target.closest('.item');if(!b)return;sel=b.dataset.id;mode='view';renderList();renderView();
+  if(window.matchMedia('(max-width:820px)').matches)$('main').scrollIntoView({behavior:'smooth'})});
+$('filters').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;filter=b.dataset.f;renderList()});
+$('q').addEventListener('input',function(e){query=e.target.value;renderList()});
+$('newBtn').onclick=function(){openEditor(null)};
+
+/* boot */
+(async function(){
+  var c=window.claude;
+  if(!c||!c.use){fail();return}
+  var res=await Promise.all([c.use('db'),c.use('user')]);db=res[0];user=res[1];
+  if(!db){fail();return}
+  try{canEdit=user?await user.canEdit():false}catch(e){canEdit=false}
+  $('newBtn').hidden=!canEdit;
+  db.collection('tutorials').orderBy('order').onSnapshot(function(snap){
+    tuts=snap.docs.map(function(d){var x=Object.assign({},d.data());x.id=d.id;x.steps=(x.steps||[]).slice();return x});
+    var first=!ready;ready=true;
+    if(first&&!sel&&tuts.length)sel=tuts[0].id;
+    if(sel&&!current())sel=null;
+    renderList();if(mode!=='edit')renderView();
+  },function(){fail()});
+})();
+function fail(){ready=true;$('countInfo').textContent='';$('main').innerHTML='<section class="sheet"><div class="empty"><strong>Library not available</strong><span>Sign in to claude.ai and open this page there to see the tutorials.</span></div></section>';renderList()}
+})();
+</script>
