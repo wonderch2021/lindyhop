@@ -1,4 +1,4 @@
-# Lindy Hop Library
+# Lindy Hop Basics for Fellas
 
 A personal tutorial library for Lindy Hop moves: count-by-count steps for leader and follower, a tempo count player, and animated footprints.
 

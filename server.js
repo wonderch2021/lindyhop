@@ -1,4 +1,4 @@
-// Lindy Hop Library server: serves index.html and the tutorials in tutorials.json (read-only).
+// Lindy Hop Basics for Fellas server: serves index.html and the tutorials in tutorials.json (read-only).
 // To add or change tutorials, edit tutorials.json in the repository and redeploy.
 // No dependencies. PORT sets the port (default 3000).
 const http = require('http');
@@ -43,4 +43,4 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(PORT, () => console.log(`Lindy Hop Library on port ${PORT} (read-only)`));
+server.listen(PORT, () => console.log(`Lindy Hop Basics for Fellas on port ${PORT} (read-only)`));
