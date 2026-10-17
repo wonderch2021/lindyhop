@@ -242,7 +242,6 @@ function renderView(){
   [t.rhythm,t.position,t.level,t.category].filter(Boolean).forEach(function(x){h+='<span class="pill">'+esc(x)+'</span>'});
   h+='</div></div></div>';
   if(t.summary)h+='<p class="summary">'+esc(t.summary)+'</p>';
-  h+=videoHtml(t);
   if(steps.length){
     h+='<div><p class="label">Count player</p><div class="player"><div class="ctl"><button class="primary" id="pp">▶ Play</button><button id="nx">Next count</button><label for="tempo" class="note">Tempo</label><input type="range" id="tempo" min="40" max="180" step="5" value="'+play.bpm+'"><span class="bpm" id="bpmo">'+play.bpm+' BPM</span></div>';
     h+='<div class="beats">'+steps.map(function(s,k){return '<button class="beat'+(isNaN(parseInt(s.count,10))?' amp':'')+'" data-k="'+k+'" aria-label="Count '+esc(s.count)+'">'+esc(s.count)+'</button>'}).join('')+'</div>';
@@ -250,6 +249,7 @@ function renderView(){
     h+='<div><p class="label">Step sheet</p><div class="tbl"><table><thead><tr><th>Count</th><th class="l">Leader</th><th class="f">Follower</th></tr></thead><tbody>'+steps.map(function(s,k){return '<tr data-k="'+k+'"><td class="c">'+esc(s.count)+'</td><td>'+esc(s.leader)+'</td><td>'+esc(s.follower)+'</td></tr>'}).join('')+'</tbody></table></div></div>';
   }
   if(tips.length)h+='<div><p class="label">Tips</p><ul class="tips">'+tips.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>';
+  h+=videoHtml(t);
   h+='</section>';
   m.innerHTML=h;
   if(steps.length){
