@@ -513,5 +513,19 @@
     "updated": 1792070600000,
     "video": "",
     "id": "underarm-pass"
+  },
+  {
+    "category": "Practice",
+    "level": "",
+    "order": 6,
+    "position": "Solo",
+    "rhythm": "6-count",
+    "steps": [],
+    "summary": "",
+    "tips": "",
+    "title": "Solo practice with music",
+    "updated": 1792224480000,
+    "video": "https://www.youtube.com/watch?v=YvIrBXnisRE&t=5s",
+    "id": "solo-practice-with-music"
   }
 ]
