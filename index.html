@@ -200,7 +200,7 @@ function beats(steps){var out=[],last=-1;steps.forEach(function(s){var n=parseIn
 function current(){return tuts.find(function(t){return t.id===sel})||null}
 
 function renderList(){
-  var cats={};tuts.forEach(function(t){cats[t.rhythm||'Other']=1});
+  var cats={};tuts.forEach(function(t){if(t.rhythm)cats[t.rhythm]=1});
   var opts=['All'].concat(Object.keys(cats).sort());
   if(opts.indexOf(filter)<0)filter='All';
   $('filters').innerHTML=opts.map(function(o){return '<button class="chip" aria-pressed="'+(o===filter)+'" data-f="'+esc(o)+'">'+esc(o)+'</button>'}).join('');
@@ -218,18 +218,28 @@ function renderList(){
   $('countInfo').textContent=tuts.length+' tutorial'+(tuts.length===1?'':'s');
 }
 
-// Reference video: YouTube links play inline (youtube-nocookie), other links open in a new tab.
+// Reference video: YouTube and Vimeo links play inline, other links open in a new tab.
 function ytEmbed(u){
   var m=String(u).match(/^https?:\/\/(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
   if(!m)return null;
   var q=String(u).match(/[?&#](?:t|start)=(?:(\d+)h)?(?:(\d+)m)?(\d+)s?\b/),st=q?(+(q[1]||0))*3600+(+(q[2]||0))*60+(+q[3]||0):0;
   return 'https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0&modestbranding=1&playsinline=1'+(st?'&start='+st:'');
 }
+// Vimeo: vimeo.com/ID, vimeo.com/ID/HASH (unlisted), player.vimeo.com/video/ID?h=HASH, optional #t=1m5s
+function vimeoEmbed(u){
+  u=String(u);
+  var m=u.match(/^https?:\/\/(?:www\.)?(?:player\.)?vimeo\.com\/(?:video\/|(?:channels\/[\w-]+|groups\/[\w-]+\/videos|showcase\/\d+\/video)\/)?(\d+)(?:\/([0-9a-f]{6,}))?/i);
+  if(!m)return null;
+  var h=m[2]||((u.match(/[?&]h=([0-9a-f]+)/i)||[])[1]),q=u.match(/#t=(?:(\d+)h)?(?:(\d+)m)?(\d+)s?/),
+    st=q?(+(q[1]||0))*3600+(+(q[2]||0))*60+(+q[3]||0):0;
+  return 'https://player.vimeo.com/video/'+m[1]+'?dnt=1&playsinline=1'+(h?'&h='+h:'')+(st?'#t='+st+'s':'');
+}
 function videoHtml(t){
   if(!t.video||!/^https?:\/\//.test(t.video))return '';
-  var e=ytEmbed(t.video);
+  var e=ytEmbed(t.video),src='YouTube';
+  if(!e){e=vimeoEmbed(t.video);src='Vimeo'}
   if(!e)return '<div><p class="label">Reference video</p><a class="btn" href="'+esc(t.video)+'" target="_blank" rel="noopener">Open video ↗</a></div>';
-  return '<div><p class="label">Demo video</p><div class="video"><iframe src="'+esc(e)+'" title="'+esc(t.title)+' demo video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="note vlink" href="'+esc(t.video)+'" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>';
+  return '<div><p class="label">'+(t.category==='Video Recap'?'Lesson video':'Demo video')+'</p><div class="video"><iframe src="'+esc(e)+'" title="'+esc(t.title)+' video" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="note vlink" href="'+esc(t.video)+'" target="_blank" rel="noopener">Watch on '+src+' ↗</a></div>';
 }
 function renderView(){
   stop();
