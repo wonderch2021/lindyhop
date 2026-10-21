@@ -569,5 +569,170 @@
     "updated": 1792572444449,
     "video": "https://vimeo.com/1237926850",
     "id": "lesson-3-2026-10-20"
+  },
+  {
+    "category": "8-count basics",
+    "level": "Beginner",
+    "order": 5.25,
+    "position": "Open → Open",
+    "rhythm": "8-count",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step back on the left; feel the stretch in open position",
+        "follower": "Rock step back on the right",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight forward onto the right; start drawing her in with the left hand",
+        "follower": "Weight forward onto the left",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Left foot steps forward, a little to the left of her path",
+        "follower": "Right foot walks forward towards the leader",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Right foot steps and turns ¼ to the right; catch her in closed position, right hand on her back",
+        "follower": "Left foot walks forward and swivels ½ turn in the leader's arm",
+        "lf": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 180
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Triple: left, rotating with her, leading her around you",
+        "follower": "Triple: right, swinging out around the leader",
+        "lf": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 180
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick right, keep turning",
+        "follower": "Quick left",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 180
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Left; right hand lets go and sends her out",
+        "follower": "Right; travel out to arm's length",
+        "lf": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 180
+        }
+      },
+      {
+        "count": "7",
+        "leader": "Anchor triple: right, settle back, facing her",
+        "follower": "Anchor triple: left, settle back facing the leader",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 180
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick left",
+        "follower": "Quick right",
+        "lf": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 180
+        }
+      },
+      {
+        "count": "8",
+        "leader": "Right; in open position with places swapped, ready for 1",
+        "follower": "Left; in open position, places swapped, ready for 1",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 180
+        }
+      }
+    ],
+    "summary": "The signature 8-count move of Lindy Hop. From open position you bring the follower in, swing around together in closed position, and send her back out. You both end in open position on the other side.",
+    "tips": "Counts: rock step (1, 2), step step (3, 4), triple step (5 & 6), anchor triple (7 & 8).\nOn 3 step slightly out of her path, so she can walk straight in.\nOn 4 the catch is soft: right hand on her shoulder blade, don't stop her momentum.\nTurn together as a unit on 5 & 6, like a door swinging on its hinge.\nThe anchor on 7 & 8 settles your weight back and creates the stretch for the next move.\nIt takes everyone weeks to feel good. Practise it slowly with the count player first.",
+    "title": "8-count swing out",
+    "updated": 1792573453594,
+    "video": "",
+    "id": "8-count-swing-out"
   }
 ]
