@@ -73,7 +73,10 @@ main{min-width:0}
 .player{border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);padding:14px;display:flex;flex-direction:column;gap:12px}
 .ctl{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .ctl input[type=range]{flex:1;min-width:120px;accent-color:var(--brass)}
-.bpm{font-family:var(--mono);font-size:13px;font-weight:700;min-width:70px}
+.bpm{font-family:var(--mono);font-size:13px;font-weight:700;min-width:70px;display:inline-flex;align-items:center;gap:4px}
+.bpm input{font:inherit;width:3.6em;text-align:center;padding:6px 2px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);-moz-appearance:textfield}
+.bpm input::-webkit-inner-spin-button,.bpm input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.bpm .stp{min-width:32px;padding:6px 0;justify-content:center}
 .beats{display:flex;gap:6px;flex-wrap:wrap}
 .beat{font-family:var(--mono);font-weight:700;font-size:15px;min-width:38px;height:38px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:0 6px;cursor:pointer}
 .beat.amp{min-width:26px;font-size:12px}
@@ -135,6 +138,8 @@ th.l{color:var(--lead)} th.f{color:var(--follow)}
   .ctl label{order:3}
   .ctl input[type=range]{order:4;flex:1 1 0;min-width:0;height:32px}
   .bpm{order:5;text-align:right}
+  .ctl .bpm .stp{flex:0 0 auto;min-width:44px;min-height:44px}
+  .bpm input{min-height:44px;font-size:16px}
   .beats{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:4px}
   .beat,.beat.amp{min-width:0;height:44px;font-size:15px}
   .feet{gap:8px}
@@ -189,6 +194,7 @@ th.l{color:var(--lead)} th.f{color:var(--follow)}
 (function(){
 var tuts=[],sel=null,filter='All',query='',ready=false;
 var play={t:null,i:-1,bpm:70};
+function setBpm(v,src){v=Math.round(+v);if(!isFinite(v))return;v=Math.min(300,Math.max(30,v));play.bpm=v;var r=document.getElementById('tempo'),n=document.getElementById('bpmi');if(r&&src!=='slider')r.value=v;if(n&&src!=='input')n.value=v}
 var $=function(id){return document.getElementById(id)};
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function toast(msg){var t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){t.hidden=true},2400)}
@@ -253,7 +259,7 @@ function renderView(){
   h+='</div></div></div>';
   if(t.summary)h+='<p class="summary">'+esc(t.summary)+'</p>';
   if(steps.length){
-    h+='<div><p class="label">Count player</p><div class="player"><div class="ctl"><button class="primary" id="pp">▶ Play</button><button id="nx">Next count</button><label for="tempo" class="note">Tempo</label><input type="range" id="tempo" min="40" max="180" step="5" value="'+play.bpm+'"><span class="bpm" id="bpmo">'+play.bpm+' BPM</span></div>';
+    h+='<div><p class="label">Count player</p><div class="player"><div class="ctl"><button class="primary" id="pp">▶ Play</button><button id="nx">Next count</button><label for="tempo" class="note">Tempo</label><input type="range" id="tempo" min="40" max="180" step="1" value="'+play.bpm+'" aria-label="Tempo slider"><span class="bpm"><button class="stp" id="bpmd" aria-label="Slower by 1 BPM">−</button><input type="number" id="bpmi" min="30" max="300" step="1" inputmode="numeric" value="'+play.bpm+'" aria-label="Tempo in BPM"><button class="stp" id="bpmu" aria-label="Faster by 1 BPM">+</button>BPM</span></div>';
     h+='<div class="beats">'+steps.map(function(s,k){return '<button class="beat'+(isNaN(parseInt(s.count,10))?' amp':'')+'" data-k="'+k+'" aria-label="Count '+esc(s.count)+'">'+esc(s.count)+'</button>'}).join('')+'</div>';
     h+=feetHtml()+'<div class="now"><div class="bigc" id="bigc">–</div><div><div class="who l">Leader</div><p id="nowL" class="note">Press play or tap a count.</p></div><div class="f"><div class="who f">Follower</div><p id="nowF" class="note"></p></div></div></div></div>';
     h+='<div><p class="label">Step sheet</p><div class="tbl"><table><thead><tr><th>Count</th><th class="l">Leader</th><th class="f">Follower</th></tr></thead><tbody>'+steps.map(function(s,k){return '<tr data-k="'+k+'"><td class="c">'+esc(s.count)+'</td><td>'+esc(s.leader)+'</td><td>'+esc(s.follower)+'</td></tr>'}).join('')+'</tbody></table></div></div>';
@@ -264,7 +270,11 @@ function renderView(){
   m.innerHTML=h;
   if(steps.length){
     $('pp').onclick=toggle;$('nx').onclick=function(){go((play.i+1)%steps.length)};
-    $('tempo').oninput=function(e){play.bpm=+e.target.value;$('bpmo').textContent=play.bpm+' BPM'};
+    $('tempo').oninput=function(e){setBpm(e.target.value,'slider')};
+    $('bpmi').oninput=function(e){var v=Math.round(+e.target.value);if(e.target.value!==''&&v>=30&&v<=300)setBpm(v,'input')};
+    $('bpmi').onchange=function(e){setBpm(e.target.value===''?play.bpm:e.target.value)};
+    $('bpmi').onkeydown=function(e){if(e.key==='Enter')e.target.blur();if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();setBpm(play.bpm+(e.key==='ArrowUp'?1:-1))}};
+    $('bpmd').onclick=function(){setBpm(play.bpm-1)};$('bpmu').onclick=function(){setBpm(play.bpm+1)};
     m.querySelectorAll('.beat').forEach(function(b){b.onclick=function(){go(+b.dataset.k)}});
     drawFeet(-1);
   }
