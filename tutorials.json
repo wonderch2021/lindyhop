@@ -933,5 +933,19 @@
       "https://www.youtube.com/watch?v=9LLXqnjFxB0"
     ],
     "id": "closed-circle"
+  },
+  {
+    "category": "Practice",
+    "level": "",
+    "order": 6.5,
+    "position": "Solo",
+    "rhythm": "8-count",
+    "steps": [],
+    "summary": "",
+    "tips": "",
+    "title": "Solo practice leader (8 counts)",
+    "updated": 1793181847094,
+    "video": "https://www.youtube.com/watch?v=A1wRZhlkvJU&t=101s",
+    "id": "solo-practice-leader-8-counts"
   }
 ]
