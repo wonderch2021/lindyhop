@@ -767,11 +767,11 @@
     "id": "lesson-4-2026-10-27"
   },
   {
-    "category": "6-count basics",
+    "category": "8-count basics",
     "level": "Beginner",
-    "order": 1.5,
+    "order": 5.2,
     "position": "Closed → Closed",
-    "rhythm": "6-count",
+    "rhythm": "8-count",
     "steps": [
       {
         "count": "1",
@@ -850,8 +850,38 @@
       },
       {
         "count": "5",
-        "leader": "Triple step: right forward, continue turning right",
-        "follower": "Triple step: left forward, continue turning right",
+        "leader": "Walk: right forward, keep turning right",
+        "follower": "Walk: left forward, keep turning right",
+        "lf": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fr",
+          "turn": 90
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Walk: left forward; rotation keeps going",
+        "follower": "Walk: right forward",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 90
+        }
+      },
+      {
+        "count": "7",
+        "leader": "Triple step: right, start to settle",
+        "follower": "Triple step: left, start to settle",
         "lf": {
           "foot": "R",
           "dir": "fr",
@@ -870,34 +900,34 @@
         "lf": {
           "foot": "L",
           "dir": "fwd",
-          "turn": 90
+          "turn": 180
         },
         "ff": {
           "foot": "R",
           "dir": "fwd",
-          "turn": 90
+          "turn": 180
         }
       },
       {
-        "count": "6",
-        "leader": "Right; a quarter turn done, ready for 1",
-        "follower": "Left; a quarter turn done, ready for 1",
+        "count": "8",
+        "leader": "Right; about half a turn done, ready for 1",
+        "follower": "Left; about half a turn done, ready for 1",
         "lf": {
           "foot": "R",
           "dir": "place",
-          "turn": 90
+          "turn": 180
         },
         "ff": {
           "foot": "L",
           "dir": "place",
-          "turn": 90
+          "turn": 180
         }
       }
     ],
-    "summary": "Rock step and two triple steps danced in closed position while the couple rotates clockwise together around a shared center, about a quarter turn each 6 counts.",
-    "tips": "Rotate as one unit, like a door on a hinge; the turn comes from your torso and frame, not your arms.\nStay slightly offset so her right hip is near yours; then your feet walk past each other instead of colliding.\nTake small steps: the center of the circle is between you, so neither of you travels far.\nKeep the pulse down into the floor on every beat.\nRepeat it 2 to 4 times in a row, then finish with a closed basic or a send out.",
+    "summary": "The Lindy circle: rock step, triple step, two walking steps and a triple step, danced in closed position while the couple rotates clockwise together, about half a turn every 8 counts.",
+    "tips": "Rhythm: rock step (1, 2), triple step (3 & 4), walk walk (5, 6), triple step (7 & 8).\nRotate as one unit, like a door on a hinge; the turn comes from your torso and frame, not your arms.\nStay slightly offset so her right hip is near yours; then your feet walk past each other instead of colliding.\nTake small steps: the center of the circle is between you, so neither of you travels far.\nKeep the pulse down into the floor on every beat.\nThe walks on 5 and 6 should feel smooth and even, not rushed.\nRepeat it 2 to 4 times in a row, then send her out into a swing out.",
     "title": "Closed circle",
-    "updated": 1793181478457,
+    "updated": 1793181587588,
     "video": "https://www.youtube.com/watch?v=QOjYIslvbSk",
     "id": "closed-circle"
   }
