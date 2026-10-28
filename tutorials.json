@@ -762,5 +762,140 @@
     "updated": 1793181307001,
     "video": "https://vimeo.com/1240163208",
     "id": "lesson-4-2026-10-27"
+  },
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 1.5,
+    "position": "Closed → Closed",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step: left foot back, small; keep the frame compact",
+        "follower": "Rock step: right foot back, small",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight onto the right; start turning your chest to the right",
+        "follower": "Weight onto the left; feel the frame start to turn",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Triple step: left forward, slightly across, turning right",
+        "follower": "Triple step: right forward past the leader's right side, turning right",
+        "lf": {
+          "foot": "L",
+          "dir": "fr",
+          "turn": 45
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 45
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick right, keep rotating together",
+        "follower": "Quick left, keep rotating with him",
+        "lf": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 45
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 45
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Left; she stays in front of you, right hips close",
+        "follower": "Right; stay offset to his right, hips close",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 45
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 45
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Triple step: right forward, continue turning right",
+        "follower": "Triple step: left forward, continue turning right",
+        "lf": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fr",
+          "turn": 90
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick left",
+        "follower": "Quick right",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 90
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Right; a quarter turn done, ready for 1",
+        "follower": "Left; a quarter turn done, ready for 1",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 90
+        }
+      }
+    ],
+    "summary": "Rock step and two triple steps danced in closed position while the couple rotates clockwise together around a shared center, about a quarter turn each 6 counts.",
+    "tips": "Rotate as one unit, like a door on a hinge; the turn comes from your torso and frame, not your arms.\nStay slightly offset so her right hip is near yours; then your feet walk past each other instead of colliding.\nTake small steps: the center of the circle is between you, so neither of you travels far.\nKeep the pulse down into the floor on every beat.\nRepeat it 2 to 4 times in a row, then finish with a closed basic or a send out.",
+    "title": "Closed circle",
+    "updated": 1793181478457,
+    "video": "https://www.youtube.com/watch?v=QOjYIslvbSk",
+    "id": "closed-circle"
   }
 ]
