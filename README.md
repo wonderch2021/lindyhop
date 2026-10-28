@@ -28,4 +28,4 @@ node server.js
 
 ## Tutorial format
 
-Each tutorial has `title`, `category`, `rhythm` (6-count / 8-count), `position`, `level`, `summary`, `tips` (one per line), `video`, and `steps`. Each step has a `count`, `leader` and `follower` text, and footprints in `lf` / `ff`: `{ "foot": "L"|"R", "dir": "place"|"back"|"fwd"|"left"|"right"|"bl"|"br"|"fl"|"fr", "turn": 0|±45|±90|180 }`.
+Each tutorial has `title`, `category`, `rhythm` (6-count / 8-count), `position`, `level`, `summary`, `tips` (one per line), `video` (one URL, or a list of URLs for several videos), and `steps`. Each step has a `count`, `leader` and `follower` text, and footprints in `lf` / `ff`: `{ "foot": "L"|"R", "dir": "place"|"back"|"fwd"|"left"|"right"|"bl"|"br"|"fl"|"fr", "turn": 0|±45|±90|180 }`.

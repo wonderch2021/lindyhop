@@ -240,12 +240,16 @@ function vimeoEmbed(u){
     st=q?(+(q[1]||0))*3600+(+(q[2]||0))*60+(+q[3]||0):0;
   return 'https://player.vimeo.com/video/'+m[1]+'?dnt=1&playsinline=1'+(h?'&h='+h:'')+(st?'#t='+st+'s':'');
 }
+// t.video is one URL or a list of URLs; each plays inline, numbered when there are several.
 function videoHtml(t){
-  if(!t.video||!/^https?:\/\//.test(t.video))return '';
-  var e=ytEmbed(t.video),src='YouTube';
-  if(!e){e=vimeoEmbed(t.video);src='Vimeo'}
-  if(!e)return '<div><p class="label">Reference video</p><a class="btn" href="'+esc(t.video)+'" target="_blank" rel="noopener">Open video ↗</a></div>';
-  return '<div><p class="label">'+(t.category==='Video Recap'?'Lesson video':'Demo video')+'</p><div class="video"><iframe src="'+esc(e)+'" title="'+esc(t.title)+' video" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="note vlink" href="'+esc(t.video)+'" target="_blank" rel="noopener">Watch on '+src+' ↗</a></div>';
+  var list=(Array.isArray(t.video)?t.video:[t.video]).filter(function(u){return u&&/^https?:\/\//.test(u)});
+  return list.map(function(u,i){return oneVideoHtml(t,u,list.length>1?' '+(i+1):'')}).join('');
+}
+function oneVideoHtml(t,u,num){
+  var e=ytEmbed(u),src='YouTube';
+  if(!e){e=vimeoEmbed(u);src='Vimeo'}
+  if(!e)return '<div><p class="label">Reference video'+num+'</p><a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener">Open video ↗</a></div>';
+  return '<div><p class="label">'+(t.category==='Video Recap'?'Lesson video':'Demo video')+num+'</p><div class="video"><iframe src="'+esc(e)+'" title="'+esc(t.title)+' video'+num+'" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><a class="note vlink" href="'+esc(u)+'" target="_blank" rel="noopener">Watch on '+src+' ↗</a></div>';
 }
 function renderView(){
   stop();
