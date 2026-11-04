@@ -948,5 +948,143 @@
     "updated": 1793181961679,
     "video": "https://www.youtube.com/watch?v=gIF_t43KtXM",
     "id": "solo-practice-leader-8-counts"
+  },
+  {
+    "category": "8-count basics",
+    "level": "Beginner",
+    "order": 5.3,
+    "position": "Open → Open",
+    "rhythm": "8-count",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step: left foot back, small",
+        "follower": "Rock step: right foot back, small",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight forward onto the right",
+        "follower": "Weight forward onto the left",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Kick: left foot swings forward, no weight on it",
+        "follower": "Kick: right foot swings forward, no weight on it",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Step: left foot lands back behind the right, take the weight",
+        "follower": "Step: right foot lands back behind the left, take the weight",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Touch: right foot reaches back, no weight on it",
+        "follower": "Touch: left foot reaches back, no weight on it",
+        "lf": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Step: right foot comes forward, take the weight",
+        "follower": "Step: left foot comes forward, take the weight",
+        "lf": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "7",
+        "leader": "Kick: left foot swings forward, no weight on it",
+        "follower": "Kick: right foot swings forward, no weight on it",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "8",
+        "leader": "Step: left foot lands back behind the right, take the weight",
+        "follower": "Step: right foot lands back behind the left, take the weight",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      }
+    ],
+    "summary": "The basic Charleston in 8-count rhythm. After a rock step you swing the legs in a steady forward and back pattern: kick forward, step back, touch back, step forward. Danced here in open position, hand to hand, with the follower mirroring the leader.",
+    "tips": "Rhythm: rock step (1, 2), kick, step (3, 4), touch, step (5, 6), kick, step (7, 8).\nThe rock step is only the way in. To keep going, replace it: on 1 touch the right foot back, on 2 step forward onto it, then carry on from 3.\nTo leave the Charleston, step left on 7 and right on 8 instead of kicking, so your weight is on the right for a rock step on the next 1.\nOnly the steps take weight. Kicks and touches stay light, so you can change direction straight away.\nKeep a small bounce in your knees on every beat, and let your arms swing in opposition to your legs.\nKeep the kicks low and slightly offset so you do not hit your partner's feet.\nPractise it solo and slowly with the count player first, then hand to hand.",
+    "title": "8-count basic Charleston",
+    "updated": 1793782510455,
+    "video": [
+      "https://www.youtube.com/watch?v=urM_KBbuyCc",
+      "https://www.youtube.com/watch?v=Iq21fU5E7Hk"
+    ],
+    "id": "8-count-basic-charleston"
   }
 ]
