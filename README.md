@@ -2,6 +2,16 @@
 
 A personal tutorial library for Lindy Hop moves: count-by-count steps for leader and follower, a tempo count player, and animated footprints.
 
+## Practice features
+
+- **Count player sound** – click on every count (accents on count 1 and on rock steps, softer on the swung “&”), optional spoken counts, a spoken 5-6-7-8 lead-in, and optional music underneath.
+- **Practice Room → Music & Tempo** – a swing groove (brushes, ride, walking bass, rhythm guitar) generated in the browser at any tempo, quick tempos 120–180, and tap tempo.
+- **Practice Room → Combo Caller** – pick moves; the caller chains them by position (from `position`, e.g. `Open → Closed`) and says the next move just before it starts.
+- **Practice Room → Practice Session** – timed blocks (drill a move, combo caller, free dance) with tempo changes, spoken transitions and ready-made plans. The plan is saved in the browser.
+- **Videos** – 0.5× / 0.75× speed, −5 s and A–B looping under each video (YouTube and video files; Vimeo speed only where the video owner allows it).
+
+Settings and the session plan live in the browser's local storage; the server stays read-only.
+
 ## Files
 
 - `index.html` – the page (read-only: browse tutorials, count player, footprints).
