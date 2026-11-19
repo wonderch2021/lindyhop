@@ -374,7 +374,8 @@ function renderView(){
   if(t.summary)h+='<p class="summary">'+esc(t.summary)+'</p>';
   if(steps.length){
     h+='<div><p class="label">Count player</p><div class="player"><div class="ctl"><button class="primary" id="pp">▶ Play</button><button id="nx">Next count</button><label for="tempo" class="note">Tempo</label><input type="range" id="tempo" min="40" max="180" step="1" value="'+play.bpm+'" aria-label="Tempo slider"><span class="bpm"><button class="stp" id="bpmd" aria-label="Slower by 1 BPM">−</button><input type="number" id="bpmi" min="30" max="300" step="1" inputmode="numeric" value="'+play.bpm+'" aria-label="Tempo in BPM"><button class="stp" id="bpmu" aria-label="Faster by 1 BPM">+</button>BPM</span></div>';
-    h+='<div class="toggles">'+tg('click','Click')+tg('countin','5-6-7-8 lead-in')+tg('voice','Say counts')+tg('music','Music')+'</div>';
+    h+='<div class="toggles">'+tg('click','Click')+tg('countin','5-6-7-8 lead-in')+tg('music','Music')+'</div>';
+    h+='<div class="toggles"><span class="note">Voice</span>'+[['off','Off'],['counts','Counts'],['steps','Rock step / triple step']].map(function(v){return '<button class="chip tg" data-voice="'+v[0]+'" aria-pressed="'+(PREF.voice===v[0])+'">'+v[1]+'</button>'}).join('')+'</div>';
     h+='<div class="beats">'+steps.map(function(s,k){return '<button class="beat'+(isNaN(parseInt(s.count,10))?' amp':'')+'" data-k="'+k+'" aria-label="Count '+esc(s.count)+'">'+esc(s.count)+'</button>'}).join('')+'</div>';
     h+=feetHtml()+'<div class="now"><div class="bigc" id="bigc">–</div><div><div class="who l">Leader</div><p id="nowL" class="note">Press play or tap a count.</p></div><div class="f"><div class="who f">Follower</div><p id="nowF" class="note"></p></div></div></div></div>';
     h+='<div><p class="label">Step sheet</p><div class="tbl"><table><thead><tr><th>Count</th><th class="l">Leader</th><th class="f">Follower</th></tr></thead><tbody>'+steps.map(function(s,k){return '<tr data-k="'+k+'"><td class="c">'+esc(s.count)+'</td><td>'+esc(s.leader)+'</td><td>'+esc(s.follower)+'</td></tr>'}).join('')+'</tbody></table></div></div>';
@@ -438,7 +439,8 @@ function startPlayer(){
     var pos=beat%info.len;
     info.b.forEach(function(bb,k){if(Math.floor(bb+1e-6)!==pos)return;var tt=time+(bb-pos)*spb,n=parseInt(st[k].count,10);
       if(PREF.click)SND.click(tt,info.acc[k]);
-      if(PREF.voice&&!isNaN(n))say(WORDS[n]||String(n),tt,1.6);
+      if(PREF.voice==='counts'&&!isNaN(n))say(WORDS[n]||String(n),tt,1.6);
+      if(PREF.voice==='steps'&&info.names[k])say(info.names[k],tt,Math.max(1.3,Math.min(2.2,play.bpm/80)));
       at(tt,function(){if(current()===t&&$('bigc'))go(k)})});
   },PREF.countin?4:0,'player');
   if(!ok)return;play.t=1;$('pp').textContent='❚❚ Pause';
@@ -521,15 +523,22 @@ function moveInfo(t){
   var num=st.map(function(s){return parseInt(s.count,10)}),acc=num.map(function(n){return isNaN(n)?'off':'beat'});
   for(var i=0;i<st.length-1;i++){if(!isNaN(num[i])&&num[i+1]===num[i]+1&&(i+2>=st.length||!isNaN(num[i+2]))){acc[i]='rock';i++}}
   num.forEach(function(n,i){if(n===1)acc[i]='one'});
-  return {len:len,b:b,acc:acc}}
+  var names=num.map(function(){return ''});
+  if(st.some(function(s){return s.count==='&'})){
+    acc.forEach(function(a,i){if(a==='rock'||(a==='one'&&num[i+1]===2&&(i+2>=st.length||!isNaN(num[i+2]))))names[i]='rock step'});
+    for(i=0;i<st.length-1;i++)if(!isNaN(num[i])&&st[i+1].count==='&')names[i]='triple step'}
+  return {len:len,b:b,acc:acc,names:names}}
 
 /* settings remembered in this browser only */
 var PREF={click:true,countin:true,voice:false,music:false,style:'band',mBpm:140,mClick:false,mVoice:false,
   cBpm:130,cMusic:true,cClick:false,cVoice:true,cBasics:false,cMoves:null,sMusic:true,sClick:true,sVoice:true};
 try{Object.assign(PREF,JSON.parse(localStorage.getItem('lh-prefs')||'{}'))}catch(e){}
+if(PREF.voice===true)PREF.voice='counts';if(['counts','steps'].indexOf(PREF.voice)<0)PREF.voice='off';
 function savePref(){try{localStorage.setItem('lh-prefs',JSON.stringify(PREF))}catch(e){}}
 function tg(key,label){return '<button class="chip tg" data-pref="'+key+'" aria-pressed="'+!!PREF[key]+'">'+label+'</button>'}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-pref]');if(!b)return;var k=b.dataset.pref;PREF[k]=!PREF[k];b.setAttribute('aria-pressed',String(PREF[k]));savePref()});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-voice]');if(!b)return;PREF.voice=b.dataset.voice;savePref();
+  b.parentNode.querySelectorAll('[data-voice]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b))})});
 function txt(id,s){var e=$(id);if(e)e.textContent=s}
 function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 function tempoHtml(p,v,min,max){return '<div class="ctl"><button class="primary" id="'+p+'-go">▶ Start</button><label for="'+p+'-r" class="note">Tempo</label><input type="range" id="'+p+'-r" min="'+min+'" max="'+max+'" step="1" value="'+v+'" aria-label="Tempo slider"><span class="bpm"><button class="stp" id="'+p+'-d" aria-label="Slower by 1 BPM">−</button><input type="number" id="'+p+'-i" min="30" max="300" step="1" inputmode="numeric" value="'+v+'" aria-label="Tempo in BPM"><button class="stp" id="'+p+'-u" aria-label="Faster by 1 BPM">+</button>BPM</span></div>'}
@@ -677,7 +686,7 @@ function makeSub(b){
   var t=b.type==='drill'&&tutById(b.id);
   if(t&&(t.steps||[]).length){var st=t.steps,info=moveInfo(t);
     return {boundary:function(rel){return rel%info.len===0},beat:function(rel,time,spb){var pos=rel%info.len;
-      info.b.forEach(function(bb,k){if(Math.floor(bb+1e-6)!==pos)return;var tt=time+(bb-pos)*spb;if(PREF.sClick)SND.click(tt,info.acc[k]);
+      info.b.forEach(function(bb,k){if(Math.floor(bb+1e-6)!==pos)return;var tt=time+(bb-pos)*spb;if(PREF.sClick)SND.click(tt,info.acc[k]);if(PREF.sVoice&&info.names[k])say(info.names[k],tt,Math.max(1.3,Math.min(2.2,TR.bpm/80)));
         at(tt,function(){txt('s-cnt',st[k].count);var e=$('s-cue');if(e)e.innerHTML='<b>Leader</b>'+esc(st[k].leader||'')})})}}}
   if(b.type==='caller'){var mv=sesMoves(b);if(mv.length){
     var cal=makeCaller(mv,{click:function(){return PREF.sClick},voice:function(){return PREF.sVoice},basics:function(){return PREF.cBasics}},function(tt,cur,nxt,pos){at(tt,function(){txt('s-cnt',pos+1);

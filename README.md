@@ -4,7 +4,7 @@ A personal tutorial library for Lindy Hop moves: count-by-count steps for leader
 
 ## Practice features
 
-- **Count player sound** – click on every count (accents on count 1 and on rock steps, softer on the swung “&”), optional spoken counts, a spoken 5-6-7-8 lead-in, and optional music underneath.
+- **Count player sound** – click on every count (accents on count 1 and on rock steps, softer on the swung “&”), a voice that says the counts or "rock step" / "triple step", a spoken 5-6-7-8 lead-in, and optional music underneath.
 - **Practice Room → Music & Tempo** – a swing groove (brushes, ride, walking bass, rhythm guitar) generated in the browser at any tempo, quick tempos 120–180, and tap tempo.
 - **Practice Room → Combo Caller** – pick moves; the caller chains them by position (from `position`, e.g. `Open → Closed`) and says the next move just before it starts.
 - **Practice Room → Practice Session** – timed blocks (drill a move, combo caller, free dance) with tempo changes, spoken transitions and ready-made plans. The plan is saved in the browser.
