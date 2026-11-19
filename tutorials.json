@@ -1089,6 +1089,111 @@
     "id": "8-count-basic-charleston"
   },
   {
+    "category": "Charleston",
+    "level": "Beginner",
+    "order": 5.31,
+    "position": "Open → Open",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step: left foot back, small",
+        "follower": "Rock step: right foot back, small",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight forward onto the right",
+        "follower": "Weight forward onto the left",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Kick: left foot swings forward, no weight on it",
+        "follower": "Kick: right foot swings forward, no weight on it",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Step: left foot lands back behind the right, take the weight",
+        "follower": "Step: right foot lands back behind the left, take the weight",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Touch: right foot reaches back, no weight on it",
+        "follower": "Touch: left foot reaches back, no weight on it",
+        "lf": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Step: right foot comes forward, take the weight",
+        "follower": "Step: left foot comes forward, take the weight",
+        "lf": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        }
+      }
+    ],
+    "summary": "The basic Charleston in 6-count rhythm: a rock step followed by one Charleston swing of the legs, kick forward, step back, touch back, step forward. It ends with the weight on the leader's right (follower's left), so it fits straight into any 6-count move. Danced here in open position, hand to hand, with the follower mirroring the leader.",
+    "tips": "Rhythm: rock step (1, 2), kick, step (3, 4), touch, step (5, 6).\nUnlike the 8-count version, the rock step is part of the pattern: every 6 counts starts with a fresh rock step on 1.\nBecause it starts and ends like a 6-count basic, you can drop it in after a closed or open basic and go straight back out of it.\nOnly the steps take weight. Kicks and touches stay light, so you can change direction straight away.\nKeep a small bounce in your knees on every beat, and let your arms swing in opposition to your legs.\nKeep the kicks low and slightly offset so you do not hit your partner's feet.\nPractise it solo and slowly with the count player first, then hand to hand.",
+    "title": "6-count basic Charleston",
+    "updated": 1795076036764,
+    "video": "https://res.cloudinary.com/dde9xhzio/video/upload/v1795075072/Lindy/20261117-6_Count_Charleston.mp4",
+    "id": "6-count-basic-charleston"
+  },
+  {
     "category": "Video Recap",
     "level": "",
     "order": 11,
