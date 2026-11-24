@@ -70,6 +70,8 @@ aside{display:flex;flex-direction:column;gap:12px;position:sticky;top:calc(env(s
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-family:var(--head);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);box-shadow:none}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#sections .chip{text-transform:none;letter-spacing:.02em;font-size:13px}
+#sections .chip[aria-pressed="true"]{background:var(--savoy);border-color:var(--savoy)}
 
 /* the library reads like a dance card */
 .list{display:flex;flex-direction:column;gap:2px;max-height:62vh;overflow:auto;padding-right:2px}
@@ -166,6 +168,7 @@ th.l{color:var(--lead)} th.f{color:var(--follow)}
   aside{gap:10px}
   .list{flex-direction:row;overflow-x:auto;gap:8px;max-height:none;padding:2px 6px 8px 2px;margin:0 -2px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .list::-webkit-scrollbar{display:none}
+  #sections{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}#sections::-webkit-scrollbar{display:none}#sections .chip{flex:none;white-space:nowrap}
   .group{display:none}
   .list .note{white-space:nowrap}
   .item{flex:0 0 auto;width:auto;max-width:72vw;min-width:150px;scroll-snap-align:start;border:1px solid var(--line);background:var(--surface);padding:10px 12px;min-height:56px}
@@ -286,6 +289,7 @@ span.beat{cursor:default}
   <div class="grid" id="libView">
     <aside>
       <input class="search" id="q" type="search" placeholder="Search moves, notes…" aria-label="Search tutorials">
+      <div class="chips" id="sections" role="group" aria-label="Jump to section"></div>
       <div class="chips" id="filters" role="group" aria-label="Filter by rhythm"></div>
       <nav class="list" id="list" aria-label="Tutorials"></nav>
     </aside>
@@ -298,7 +302,8 @@ span.beat{cursor:default}
 
 <script>
 (function(){
-var tuts=[],sel=null,filter='All',query='',ready=false;
+var tuts=[],sel=null,filter='All',query='',ready=false,section='All';
+try{section=localStorage.getItem('lh-section')||'All'}catch(e){}
 var play={t:null,i:-1,bpm:70};
 function setBpm(v,src){v=Math.round(+v);if(!isFinite(v))return;v=Math.min(300,Math.max(30,v));play.bpm=v;if(TR.owner==='player')TR.bpm=v;var r=document.getElementById('tempo'),n=document.getElementById('bpmi');if(r&&src!=='slider')r.value=v;if(n&&src!=='input')n.value=v}
 var $=function(id){return document.getElementById(id)};
@@ -316,8 +321,14 @@ function renderList(){
   var opts=['All'].concat(Object.keys(cats).sort());
   if(opts.indexOf(filter)<0)filter='All';
   $('filters').innerHTML=opts.map(function(o){return '<button class="chip" aria-pressed="'+(o===filter)+'" data-f="'+esc(o)+'">'+esc(o)+'</button>'}).join('');
+  // Section buttons: one per category, in the order the sections appear in the library.
+  var secs=[];tuts.forEach(function(t){var g=t.category||'Uncategorised';if(secs.indexOf(g)<0)secs.push(g)});
+  if(section!=='All'&&secs.indexOf(section)<0)section='All';
+  $('sections').innerHTML=(secs.length>1?['All sections'].concat(secs):[]).map(function(g){var v=g==='All sections'?'All':g;return '<button class="chip sec" aria-pressed="'+(v===section)+'" data-s="'+esc(v)+'">'+esc(g)+'</button>'}).join('');
+  var sb=$('sections'),on=sb.querySelector('[aria-pressed="true"]');if(on&&sb.scrollWidth>sb.clientWidth)sb.scrollLeft=Math.max(0,on.offsetLeft-sb.offsetLeft-16);
   var q=query.toLowerCase();
   var vis=tuts.filter(function(t){
+    if(section!=='All'&&(t.category||'Uncategorised')!==section)return false;
     if(filter!=='All'&&(t.rhythm||'Other')!==filter)return false;
     if(!q)return true;
     return JSON.stringify([t.title,t.category,t.summary,t.tips,t.steps]).toLowerCase().indexOf(q)>-1});
@@ -808,6 +819,7 @@ document.addEventListener('click',function(e){
 $('list').addEventListener('click',function(e){var b=e.target.closest('.item');if(!b)return;sel=b.dataset.id;renderList();renderView();
   if(window.matchMedia('(max-width:820px)').matches){var a=$('list').querySelector('[aria-current="true"]');if(a)a.scrollIntoView({block:'nearest',inline:'nearest'})}});
 $('filters').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;filter=b.dataset.f;renderList()});
+$('sections').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;section=b.dataset.s;try{localStorage.setItem('lh-section',section)}catch(x){}renderList();var l=$('list');l.scrollTop=0;l.scrollLeft=0});
 $('q').addEventListener('input',function(e){query=e.target.value;renderList()});
 
 /* boot: inside a claude.ai artifact the tutorials live in the artifact's db;
