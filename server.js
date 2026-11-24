@@ -13,6 +13,10 @@ const TUTORIALS = path.join(__dirname, 'tutorials.json');
 // its own document shell), so wrap it in a full document with a mobile viewport here.
 const HEAD = '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
   '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">' +
+  '<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">' +
+  '<meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">' +
+  // Reload when the page is restored from the back/forward cache, so it is never stale.
+  '<script>addEventListener("pageshow",function(e){if(e.persisted)location.reload()})</script>' +
   '<meta name="theme-color" content="#EFE4CC" media="(prefers-color-scheme: light)">' +
   '<meta name="theme-color" content="#13100C" media="(prefers-color-scheme: dark)">' +
   '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}' +
@@ -23,7 +27,11 @@ const FOOT = '</body></html>';
 function send(res, status, body, type) {
   res.writeHead(status, {
     'Content-Type': type || 'application/json; charset=utf-8',
-    'Cache-Control': 'no-cache',
+    // Never cache: the browser (and Cloudflare) fetch a fresh copy on every load.
+    'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+    'CDN-Cache-Control': 'no-store',
+    'Pragma': 'no-cache',
+    'Expires': '0',
     'X-Content-Type-Options': 'nosniff',
   });
   res.end(type ? body : JSON.stringify(body));
