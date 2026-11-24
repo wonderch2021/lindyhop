@@ -1293,15 +1293,166 @@
   },
   {
     "category": "8-count basics",
-    "level": "",
+    "level": "Beginner",
     "order": 5.21,
-    "position": "",
+    "position": "Open → Closed",
     "rhythm": "8-count",
-    "steps": [],
-    "summary": "",
-    "tips": "",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step: left foot back in open position; feel the connection in your left hand",
+        "follower": "Rock step: right foot back",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight forward onto the right; start drawing her in with the left hand",
+        "follower": "Weight forward onto the left; start walking in",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Triple step: left forward, small, a little to your left so she lands at your right side",
+        "follower": "Triple step: right forward, walking towards the leader",
+        "lf": {
+          "foot": "L",
+          "dir": "fl",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick right; right hand comes up to meet her back",
+        "follower": "Quick left, still travelling in",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Left; catch her in closed position, her right hip near yours, start turning your chest right",
+        "follower": "Right; arrive in closed position, slightly offset to his right",
+        "lf": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 45
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 45
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Walk: right forward, turning right together",
+        "follower": "Walk: left forward, turning right with him",
+        "lf": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fr",
+          "turn": 90
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Walk: left forward; keep the rotation going",
+        "follower": "Walk: right forward",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 90
+        }
+      },
+      {
+        "count": "7",
+        "leader": "Triple step: right, start to settle",
+        "follower": "Triple step: left, start to settle",
+        "lf": {
+          "foot": "R",
+          "dir": "fr",
+          "turn": 90
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fr",
+          "turn": 90
+        }
+      },
+      {
+        "count": "&",
+        "leader": "Quick left",
+        "follower": "Quick right",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 180
+        }
+      },
+      {
+        "count": "8",
+        "leader": "Right; in closed position, about half a turn done, ready for 1",
+        "follower": "Left; in closed position, ready for 1",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 180
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 180
+        }
+      }
+    ],
+    "summary": "From open position you bring the follower into closed position on the first triple step, then turn clockwise together for the rest of the 8 counts. You end in closed position, ready for a closed circle or a swing out.",
+    "tips": "Rhythm: rock step (1, 2), triple step (3 & 4), walk walk (5, 6), triple step (7 & 8).\nOn 3 & 4, step slightly out of her path so she arrives at your right side, not toe to toe.\nThe right hand meets her back on 4; don't grab or pull her in.\nOn 5 and 6, turn as one unit, like a door on a hinge; the turn comes from your torso and frame.\nKeep the steps small: the centre of the circle is between you.\nFrom here go straight into a closed circle, or a swing out to get back to open.\nTip: this page was written from the standard move; check the counts against the video and tell me what to adjust.",
     "title": "Basic circle",
-    "updated": 1795511255868,
+    "updated": 1795511391004,
     "video": "https://www.youtube.com/watch?v=B77079iTT-s",
     "id": "basic-circle"
   }
