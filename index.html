@@ -314,6 +314,9 @@ function slug(s){return (s||'tutorial').toLowerCase().replace(/[^a-z0-9]+/g,'-')
 /* beat math: "1".."8" sit on the beat, "&"/"a" is a swung offbeat after the previous count */
 function beats(steps){var out=[],last=-1;steps.forEach(function(s){var n=parseInt(s.count,10);var b=isNaN(n)?last+0.67:n-1;if(!isNaN(n))last=n-1;out.push(b)});return out}
 
+// " · v5 · deployed 24 Nov, 10:05", from the server; empty when the page runs without it.
+function versionLabel(){var a=window.APP_VERSION;if(!a||!a.version)return '';var s=' · v'+a.version,d=new Date(a.deployed);
+  if(!isNaN(d))s+=' · deployed '+d.toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});return s}
 function current(){return tuts.find(function(t){return t.id===sel})||null}
 
 function renderList(){
@@ -338,7 +341,7 @@ function renderList(){
   $('list').innerHTML=Object.keys(groups).map(function(g){
     return '<div class="group">'+esc(g)+'</div>'+groups[g].map(function(t){
       return '<button class="item" data-id="'+esc(t.id)+'" aria-current="'+(t.id===sel)+'"><b>'+esc(t.title)+'</b><span class="tag'+(/8/.test(t.rhythm||'')?' eight':'')+'">'+esc(t.rhythm||'–')+'</span><small>'+esc([t.position,t.level].filter(Boolean).join(' · '))+'</small></button>'}).join('')}).join('');
-  $('countInfo').textContent=tuts.length+' tutorial'+(tuts.length===1?'':'s');
+  $('countInfo').textContent=tuts.length+' tutorial'+(tuts.length===1?'':'s')+versionLabel();
 }
 
 // Reference video: YouTube and Vimeo links play inline, other links open in a new tab.

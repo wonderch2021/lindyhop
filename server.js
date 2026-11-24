@@ -9,6 +9,12 @@ const PORT = Number(process.env.PORT) || 3000;
 const PAGE = path.join(__dirname, 'index.html');
 const TUTORIALS = path.join(__dirname, 'tutorials.json');
 
+// Version shown in the page header: the number in VERSION (bump it with every change)
+// plus the time this server started, i.e. when the deployment went live.
+let VERSION = '';
+try { VERSION = fs.readFileSync(path.join(__dirname, 'VERSION'), 'utf8').trim(); } catch (e) {}
+const STARTED = new Date().toISOString();
+
 // index.html is written as page content (it also runs as a claude.ai artifact, which adds
 // its own document shell), so wrap it in a full document with a mobile viewport here.
 const HEAD = '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
@@ -23,6 +29,7 @@ const HEAD = '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
   'body{margin:0;font:14px system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%}' +
   'img{max-width:100%}[hidden]{display:none!important}</style></head><body>';
 const FOOT = '</body></html>';
+const APP = '<script>window.APP_VERSION=' + JSON.stringify({ version: VERSION, deployed: STARTED }).replace(/</g, '\\u003c') + '</script>';
 
 function send(res, status, body, type) {
   res.writeHead(status, {
@@ -41,8 +48,8 @@ const server = http.createServer((req, res) => {
   const p = new URL(req.url, 'http://localhost').pathname;
   try {
     if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, { error: 'read-only' });
-    if (p === '/' || p === '/index.html') return send(res, 200, HEAD + fs.readFileSync(PAGE, 'utf8') + FOOT, 'text/html; charset=utf-8');
-    if (p === '/api/health') return send(res, 200, { ok: true });
+    if (p === '/' || p === '/index.html') return send(res, 200, HEAD + APP + fs.readFileSync(PAGE, 'utf8') + FOOT, 'text/html; charset=utf-8');
+    if (p === '/api/health') return send(res, 200, { ok: true, version: VERSION, deployed: STARTED });
     if (p === '/api/tutorials') return send(res, 200, fs.readFileSync(TUTORIALS), 'application/json; charset=utf-8');
     send(res, 404, { error: 'not found' });
   } catch (e) {

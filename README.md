@@ -17,6 +17,7 @@ Settings and the session plan live in the browser's local storage; the server st
 - `index.html` – the page (read-only: browse tutorials, count player, footprints).
 - `server.js` – a small Node server (no dependencies) that serves the page and `tutorials.json`.
 - `tutorials.json` – all tutorials. To add or change a move, edit this file and push; Dokploy redeploys.
+- `VERSION` – the version number shown in the page header, next to when the deployment went live. Increase it by one with every change, so you can see which version is deployed.
 - `Dockerfile` – builds the app image.
 
 ## Deploy on Dokploy
