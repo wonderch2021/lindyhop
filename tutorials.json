@@ -1290,5 +1290,19 @@
     "updated": 1795510772562,
     "video": "https://www.youtube.com/watch?v=0_G64SX7rRQ",
     "id": "basic-flows"
+  },
+  {
+    "category": "8-count basics",
+    "level": "",
+    "order": 5.21,
+    "position": "",
+    "rhythm": "8-count",
+    "steps": [],
+    "summary": "",
+    "tips": "",
+    "title": "Basic circle",
+    "updated": 1795511255868,
+    "video": "https://www.youtube.com/watch?v=B77079iTT-s",
+    "id": "basic-circle"
   }
 ]
