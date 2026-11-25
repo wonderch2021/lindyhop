@@ -1483,5 +1483,110 @@
     "updated": 1795609278441,
     "video": "https://www.youtube.com/watch?v=9e59lGdeCm0&t=252s",
     "id": "frankie-sixes"
+  },
+  {
+    "category": "6-count basics",
+    "level": "Beginner",
+    "order": 5.12,
+    "position": "Open → Open",
+    "rhythm": "6-count",
+    "steps": [
+      {
+        "count": "1",
+        "leader": "Rock step: left foot back, small",
+        "follower": "Rock step: right foot back, small",
+        "lf": {
+          "foot": "L",
+          "dir": "back",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "back",
+          "turn": 0
+        }
+      },
+      {
+        "count": "2",
+        "leader": "Weight forward onto the right",
+        "follower": "Weight forward onto the left",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "3",
+        "leader": "Kick: left foot kicks low and forward, no weight on it",
+        "follower": "Kick: right foot kicks low and forward, no weight on it",
+        "lf": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "4",
+        "leader": "Step: left foot comes back under you, take the weight",
+        "follower": "Step: right foot comes back under you, take the weight",
+        "lf": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        }
+      },
+      {
+        "count": "5",
+        "leader": "Kick: right foot kicks low and forward, no weight on it",
+        "follower": "Kick: left foot kicks low and forward, no weight on it",
+        "lf": {
+          "foot": "R",
+          "dir": "fwd",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "fwd",
+          "turn": 0
+        }
+      },
+      {
+        "count": "6",
+        "leader": "Step: right foot comes back under you, take the weight",
+        "follower": "Step: left foot comes back under you, take the weight",
+        "lf": {
+          "foot": "R",
+          "dir": "place",
+          "turn": 0
+        },
+        "ff": {
+          "foot": "L",
+          "dir": "place",
+          "turn": 0
+        }
+      }
+    ],
+    "summary": "The 6-count basic with the two triple steps replaced by kick steps: rock step (1, 2), kick step (3, 4), kick step (5, 6). It keeps the same weight changes as the basic, ending on the leader's right (follower's left), so you can swap it in for any 6-count basic. Shown here in open position, with the follower mirroring the leader.",
+    "tips": "Rhythm: rock step (1, 2), kick, step (3, 4), kick, step (5, 6).\nOnly the steps take weight. The kick is a light flick from the knee, and the foot comes straight back under you.\nKeep the kicks low and slightly to the side so you do not hit your partner's feet.\nKeep the bounce going on every beat, just as in the triple steps.\nDrill it solo with the count player first, then switch between triple steps and kick steps from one basic to the next.\nThe kick steps also work in closed position: there, kick a little to the side, not forward.",
+    "title": "6-count kick step",
+    "updated": 1795610368961,
+    "video": "https://www.youtube.com/watch?v=yMe9kMzPMUY",
+    "id": "6-count-kick-step"
   }
 ]
