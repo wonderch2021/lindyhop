@@ -109,6 +109,7 @@ main{min-width:0}
 .video{position:relative;width:100%;max-width:720px;aspect-ratio:16/9;border-radius:0;overflow:hidden;background:#000;border:6px solid var(--ink);box-shadow:0 0 0 1px var(--brass),4px 4px 0 1px var(--line)}
 .video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0;filter:sepia(.15)}
 .video video{object-fit:contain;background:#000}
+.video.portrait{aspect-ratio:9/16;max-width:min(360px,100%)}
 .vlink{display:inline-block;margin-top:8px;font-size:13px;color:var(--muted);font-style:italic}
 
 /* count player */
@@ -370,10 +371,12 @@ function oneVideoHtml(t,u,num){
   if(!e){e=vimeoEmbed(u);src='Vimeo'}
   else{e+='&enablejsapi=1'+(location.origin&&location.origin!=='null'?'&origin='+encodeURIComponent(location.origin):'')}
   var lbl=(t.category==='Video Recap'?'Lesson video':'Demo video')+num,vid='vid'+(++vidN);
+  // Lesson recaps are filmed on a phone, so they play in a 9:16 portrait frame.
+  var vcls=t.category==='Video Recap'?'video portrait':'video';
   // Direct video files (e.g. Cloudinary .mp4) play in a native <video> player.
-  if(!e&&/\.(mp4|webm|mov|m4v|ogv)(?:[?#]|$)/i.test(u))return '<div><p class="label">'+lbl+'</p><div class="video"><video id="'+vid+'" src="'+esc(u)+'" controls playsinline preload="metadata" title="'+esc(t.title)+' video'+num+'"></video></div>'+vctlHtml(vid)+'<a class="note vlink" href="'+esc(u)+'" target="_blank" rel="noopener">Open video file ↗</a></div>';
+  if(!e&&/\.(mp4|webm|mov|m4v|ogv)(?:[?#]|$)/i.test(u))return '<div><p class="label">'+lbl+'</p><div class="'+vcls+'"><video id="'+vid+'" src="'+esc(u)+'" controls playsinline preload="metadata" title="'+esc(t.title)+' video'+num+'"></video></div>'+vctlHtml(vid)+'<a class="note vlink" href="'+esc(u)+'" target="_blank" rel="noopener">Open video file ↗</a></div>';
   if(!e)return '<div><p class="label">Reference video'+num+'</p><a class="btn" href="'+esc(u)+'" target="_blank" rel="noopener">Open video ↗</a></div>';
-  return '<div><p class="label">'+lbl+'</p><div class="video"><iframe id="'+vid+'" src="'+esc(e)+'" title="'+esc(t.title)+' video'+num+'" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>'+vctlHtml(vid)+'<a class="note vlink" href="'+esc(u)+'" target="_blank" rel="noopener">Watch on '+src+' ↗</a></div>';
+  return '<div><p class="label">'+lbl+'</p><div class="'+vcls+'"><iframe id="'+vid+'" src="'+esc(e)+'" title="'+esc(t.title)+' video'+num+'" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>'+vctlHtml(vid)+'<a class="note vlink" href="'+esc(u)+'" target="_blank" rel="noopener">Watch on '+src+' ↗</a></div>';
 }
 function renderView(){
   stop();vreset();
