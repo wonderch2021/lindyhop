@@ -1461,7 +1461,7 @@
     "level": "",
     "order": 14,
     "position": "",
-    "rhythm": "8-count",
+    "rhythm": "6-count",
     "steps": [],
     "summary": "",
     "tips": "",
@@ -1469,5 +1469,19 @@
     "updated": 1795609032681,
     "video": "https://res.cloudinary.com/dde9xhzio/video/upload/v1795608984/Lindy/Frankie_Sixes.mp4",
     "id": "lesson-frankie-sixes-2026-11-24"
+  },
+  {
+    "category": "Flow",
+    "level": "Beginner",
+    "order": 6.95,
+    "position": "",
+    "rhythm": "6-count",
+    "steps": [],
+    "summary": "A classic sequence of six 6-count moves, named after Frankie Manning, who liked to string them together on the social floor. Each move flows straight into the next, so the sequence trains smooth transitions between closed and open position rather than any single new move. Many versions exist; follow the one from the demo video and the 24.11 class recap.",
+    "tips": "Learn each of the six moves on its own first, then join them two at a time before running the whole sequence.\nEvery move starts with a rock step on 1 and ends with a triple step on 5 & 6, so the next move always starts on a fresh 1.\nKeep a clear lead at the end of each move: the follower only knows what comes next from your connection, not from the sequence.\nStart slowly (about 120 bpm) with the count player, then raise the tempo once the transitions feel smooth.\nWhen it flows, break it up: drop single moves out of the sequence into your social dancing.",
+    "title": "Frankie Sixes",
+    "updated": 1795609278441,
+    "video": "https://www.youtube.com/watch?v=9e59lGdeCm0&t=252s",
+    "id": "frankie-sixes"
   }
 ]
